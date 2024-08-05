@@ -31,6 +31,8 @@ This repository contains a collection of study materials organized by topics, in
 
 ## Probability & Statistics
 
+## Probability & Statistics
+
 ### Books
 - **(Springer Series in Statistics) Larry Wasserman** - *All of Statistics: A Concise Course in Statistical Inference* - Springer (2004)
 - **(Springer Texts in Statistics) Rick Durrett** - *Probability: Theory and Examples* - Cambridge University Press (2019)
@@ -57,27 +59,23 @@ This repository contains a collection of study materials organized by topics, in
 
 ### Books
 
-#### C Programming
+## C Programming
+
+### Books
 - **(The Wiley Finance Series) Daniel J. Duffy** - *Financial Instrument Pricing Using C* - Wiley (2004)
 - **K. N. King** - *C Programming: A Modern Approach* - W. W. Norton & Company (2008)
 
-#### C++ Programming
-- **(Chapman and Hall_CRC Financial Mathematics Series) Schlogl, Erik** - *Quantitative Finance: An Object-Oriented Approach in C++* - CRC Press (2013)
-- C++ Primer (5th Edition, 2013).pdf
+## C++ Programming
+
+### Books
+- **(Chapman and Hall/CRC Financial Mathematics Series) Schlogl, Erik** - *Quantitative Finance: An Object-Oriented Approach in C++* - CRC Press (2013)
+- **Stanley B. Lippman, Josée Lajoie, and Barbara E. Moo** - *C++ Primer (5th Edition)* - Addison-Wesley (2013)
 - **CARLOS OLIVEIRA** - *Options and Derivatives Programming in C++: Algorithms and Programming Techniques for the Financial Industry* - Apress (2016)
 - **Cornelis W. Oosterlee, Lech A. Grzelak** - *Mathematical Modeling and Computational Finance: With Exercises and Python and MATLAB Computer Codes* - World Scientific Publishing Europe Limited (2019)
 
-#### Python Programming
-- Mark Lutz - Learning Python - O'Reilly Media (2013)
-- Wes McKinney - Python for Data Analysis - O'Reilly Media (2017)
-- Jake VanderPlas - Python Data Science Handbook - O'Reilly Media (2016)
+## Python Programming
 
----
-
-### Notes
-
-- All materials are for educational purposes and are organized to facilitate easy navigation and study.
-- Books are primarily in PDF format and organized by topics for ease of reference.
-- Lecture notes and problem sets are included for additional learning support and practice.
-# FinancialEngineeringResources
-# FinancialEngineeringResources
+### Books
+- **Mark Lutz** - *Learning Python* - O'Reilly Media (2013)
+- **Wes McKinney** - *Python for Data Analysis* - O'Reilly Media (2017)
+- **Jake VanderPlas** - *Python Data Science Handbook* - O'Reilly Media (2016)
