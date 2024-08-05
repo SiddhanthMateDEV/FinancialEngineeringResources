@@ -3,10 +3,10 @@ import numpy as np
 from timeFuncs.main import OptionsTimeFunctions
 
 
-class Straddle:
-    def __init__(self) -> None:
-        pass
-
+class Straddle(OptionsTimeFunctions):
+    def __init__(self):
+        super().__init__
+        
     def filterByExpiryAndStrike(self,
                             data = None, 
                             time = None,
