@@ -2,6 +2,17 @@
 
 This repository contains a collection of study materials organized by topics, including Finance, Probability & Statistics, and Programming. Each topic contains books, lecture notes, research papers, and problem sets to support learning and research.
 
+Apart from this it will contain python, c++, and other language support related, functionalities such as:
+- **Reading Data**
+- **Option Pricing Methods**
+- **Straddle Related Functions**
+- **Strangle Related Functions**
+- **Time Filter Functions**
+- **Strategies**
+
+Since I have just started, I will be adding more stuff here, so keep checking it.
+
+
 ## Contents
 
 - [Finance](#finance)
@@ -113,3 +124,7 @@ Studying finance, especially the quantitative aspects related to derivatives, in
 - QuantInsti
 - Mark Meldrum
 
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/SiddhanthMate)
