@@ -28,6 +28,7 @@ This repository contains a collection of study materials organized by topics, in
 - **Guojun Gan, Chaoqun Ma, and Hong Xie** - *Measure, Probability, and Mathematical Finance: A Problem-Oriented Approach* - Wiley
 - **Paul Wilmott, Sam Howison, and Jeff Dewynne** - *The Mathematics of Financial Derivatives: A Student Introduction* - Cambridge University Press (1995)
 
+---
 
 ## Probability & Statistics
 
