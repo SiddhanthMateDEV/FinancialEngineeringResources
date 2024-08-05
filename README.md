@@ -116,6 +116,16 @@ Studying finance, especially the quantitative aspects related to derivatives, in
 
 ---
 
+## Research Papers (Still need to site them hence saving the links)
+
+- **The Pricing of Options and Corporate Liabilities** (https://www.sfu.ca/~kkasa/BlackScholes_73.pdf)
+- **Theory Of Rational Option Pricing** (https://www.maths.tcd.ie/~dmcgowan/Merton.pdf)
+- **Portfolio Selection** (https://www.jstor.org/stable/2975974)
+- **The Pricing of Bonds and Bank Loans in International Markets: An Empirical Analysis of Borrowing Costs** (https://www.nber.org/system/files/working_papers/w1689/w1689.pdf)
+- **Efficient Capital Markets: A Review of Theory and Empirical Work** (https://www.google.com/search?q=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&rlz=1C5CHFA_enIN1117IN1117&oq=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzU2MWowajSoAgCwAgE&sourceid=chrome&ie=UTF-8)
+
+---
+
 ## Resources
 
 ### YouTube
