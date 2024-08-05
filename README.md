@@ -7,7 +7,7 @@ This repository contains a collection of study materials organized by topics, in
 - [Finance](#finance)
 - [Probability & Statistics](#probability--statistics)
 - [Programming](#programming)
-- [Projects](#projects)
+- [Resources](#projects)
 
 ---
 
@@ -27,10 +27,13 @@ This repository contains a collection of study materials organized by topics, in
 - **Robert Jarrow** - *Modeling Fixed-Income Securities and Interest Rate Options* - Stanford University Press (2002)
 - **Guojun Gan, Chaoqun Ma, and Hong Xie** - *Measure, Probability, and Mathematical Finance: A Problem-Oriented Approach* - Wiley
 - **Paul Wilmott, Sam Howison, and Jeff Dewynne** - *The Mathematics of Financial Derivatives: A Student Introduction* - Cambridge University Press (1995)
+Studying finance, especially the quantitative aspects related to derivatives, interest rate models, and stochastic calculus, can be challenging yet rewarding. Based on the books you’ve listed, I can suggest some lecture notes and problem sets to help you deepen your understanding of these topics. Here are some resources, organized by topic and linked to the relevant materials online.
+
+### Lectures
+- [Derivatives Markets](https://www.lse.ac.uk/resources/calendar2013-2014/courseGuides/FM/2013_FM320.htm) by the London School of Economics: Comprehensive notes on futures, options, and the Black-Scholes model.
+- [Options and Derivatives Pricing](https://web.stanford.edu/class/msande348/3480/Assets/Lecture10.pdf) by Stanford University: Notes on pricing techniques, hedging strategies, and risk management.
 
 ---
-
-## Probability & Statistics
 
 ## Probability & Statistics
 
@@ -65,10 +68,19 @@ This repository contains a collection of study materials organized by topics, in
 ### Books
 - **(The Wiley Finance Series) Daniel J. Duffy** - *Financial Instrument Pricing Using C* - Wiley (2004)
 - **K. N. King** - *C Programming: A Modern Approach* - W. W. Norton & Company (2008)
-
 ## C++ Programming
 
 ### Books
+- **Daniel J. Duffy** - *Financial Instrument Pricing Using C++* - Wiley (2004)
+- **Mark S. Joshi** - *C++ Design Patterns and Derivatives Pricing* - Cambridge University Press (2004)
+- **Robert R. Reitano** - *Quantitative Finance: An Object-Oriented Approach in C++* - MIT Press (2010)
+- **K. Choudhry and M. Rodriguez** - *Financial Modelling: Theory, Implementation and Practice with MATLAB Source* - John Wiley & Sons (2010)
+- **John C. Hull** - *Options, Futures, and Other Derivatives* - Pearson (2008) *(includes C++ code)*
+- **John Armstrong** - *C++ for Financial Mathematics* - Cambridge University Press (2021)
+- **Les Clewlow and Chris Strickland** - *Implementing Derivative Models* - John Wiley & Sons (1998)
+- **Daniel J. Duffy** - *Introduction to C++ for Financial Engineers: An Object-Oriented Approach* - Wiley (2006)
+- **Paolo Brandimarte** - *Numerical Methods in Finance and Economics: A MATLAB-Based Introduction* - Wiley (2006) *(includes C++ code examples)*
+- **Alexander J. McNeil** - *Financial Engineering with C++* - Princeton University Press (2022)
 - **(Chapman and Hall/CRC Financial Mathematics Series) Schlogl, Erik** - *Quantitative Finance: An Object-Oriented Approach in C++* - CRC Press (2013)
 - **Stanley B. Lippman, Josée Lajoie, and Barbara E. Moo** - *C++ Primer (5th Edition)* - Addison-Wesley (2013)
 - **CARLOS OLIVEIRA** - *Options and Derivatives Programming in C++: Algorithms and Programming Techniques for the Financial Industry* - Apress (2016)
@@ -77,6 +89,27 @@ This repository contains a collection of study materials organized by topics, in
 ## Python Programming
 
 ### Books
-- **Mark Lutz** - *Learning Python* - O'Reilly Media (2013)
-- **Wes McKinney** - *Python for Data Analysis* - O'Reilly Media (2017)
-- **Jake VanderPlas** - *Python Data Science Handbook* - O'Reilly Media (2016)
+
+- **Yves Hilpisch** - *Python for Finance: Mastering Data-Driven Finance* - O'Reilly Media (2018)
+- **Mark J. Bennett, Dirk L. Hugen** - *Financial Analytics with R and Python* - Cambridge University Press (2016)
+- **Yves Hilpisch** - *Python for Algorithmic Trading: From Idea to Cloud Deployment* - O'Reilly Media (2020)
+- **Eryk Lewinson** - *Python for Finance Cookbook: Over 50 Recipes for Applying Modern Python Libraries to Financial Data Analysis* - Packt Publishing (2020)
+- **Ed Roberts** - *Introduction to Financial Python* - Independently Published (2020)
+- **Shayne Fletcher, Christopher Gardner** - *Financial Modelling in Python* - Wiley (2009)
+- **Yves Hilpisch** - *Python for Finance: Analyze Big Financial Data* - O'Reilly Media (2014)
+- **Yves Hilpisch** - *Python for Finance: Develop and Deploy Financial Applications* - O'Reilly Media (2022)
+- **Eryk Lewinson** - *Python Quantitative Finance* - Packt Publishing (2020)
+- **Chris Kelliher** - *Quantitative Finance with Python: A Practical Guide for Investment Professionals* - Springer (2022)
+- **Marcos López de Prado** - *Machine Learning for Asset Managers* - Cambridge University Press (2020)
+- **Ernest Chan** - *Algorithmic Trading and Quantitative Strategies* - Independently Published (2021)
+
+---
+
+## Resources
+
+### YouTube
+
+- QuantConnect
+- QuantInsti
+- Mark Meldrum
+
