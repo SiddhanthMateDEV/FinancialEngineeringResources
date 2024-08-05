@@ -134,7 +134,17 @@ Studying finance, especially the quantitative aspects related to derivatives, in
 - QuantInsti
 - Mark Meldrum
 
+---
 
-## 🔗 Links
+### Discussions
+
+- [**Math Stack Exchange Discussions**](https://math.stackexchange.com)
+- [**Python Discord**](https://www.pythondiscord.com/)
+- [**Math Discord**](https://discord.gg/math)
+- [**C++ Discord**](https://discord.gg/tccpp)
+
+---
+
+## 🔗 My Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/SiddhanthMate)

@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{amsmath} % Used for advanced math commands
+\usepackage{amssymb} % Used for additional math symbols
+\usepackage{amsthm}  % Optional: Used for theorem environments
+\usepackage{bm}      % Used for bold math symbols
+
+\begin{document}
+
+\section*{Option Premium Calculation}
+
+To calculate the option premium, we use the Black-Scholes formula. The parameters are defined as follows:
+
+\begin{itemize}
+    \item \( S \): Spot price
+    \item \( K \): Strike price
+    \item \( T \): Time to maturity (in years)
+    \item \( r \): Risk-free rate of interest
+    \item \( \sigma \): Volatility of the underlying asset
+    \item \( \Phi \): Cumulative distribution function of the standard normal distribution
+\end{itemize}
+
+\subsection*{Formulas}
+
+\begin{align*}
+d_1 & = \frac{\ln\left(\frac{S}{K}\right) + \left(r + \frac{\sigma^2}{2}\right)T}{\sigma \sqrt{T}} \\
+d_2 & = d_1 - \sigma \sqrt{T}
+\end{align*}
+
+\subsection*{Call Option Premium}
+
+For a call option (denoted as 'CE' or 'c'), the premium is given by:
+
+\[
+C = S \Phi(d_1) - K e^{-rT} \Phi(d_2)
+\]
+
+\subsection*{Put Option Premium}
+
+For a put option (denoted as 'PE' or 'p'), the premium is given by:
+
+\[
+P = K e^{-rT} \Phi(-d_2) - S \Phi(-d_1)
+\]
+
+\subsection*{Conditions}
+
+\begin{itemize}
+    \item If the option type is call ('CE' or 'c'), use the call option premium formula.
+    \item If the option type is put ('PE' or 'p'), use the put option premium formula.
+    \item If the option type is invalid, raise an error.
+\end{itemize}
+
+\end{document}

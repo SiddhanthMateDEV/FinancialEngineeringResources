@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
-from timeFuncs.main import OptionsTimeFunctions
+# from timeFuncs.main import OptionsTimeFunctions
 
 
-class Straddle(OptionsTimeFunctions):
+class Straddle:
     def __init__(self):
         super().__init__
-        
+
     def filterByExpiryAndStrike(self,
                             data = None, 
                             time = None,
