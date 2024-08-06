@@ -122,7 +122,7 @@ Since I have just started, I will be adding more stuff here, so keep checking it
 - [**Theory Of Rational Option Pricing**](https://www.maths.tcd.ie/~dmcgowan/Merton.pdf)
 - [**(Markowitz, H. (1952)) Portfolio Selection. The Journal of Finance, 7(1).**](https://www.jstor.org/stable/2975974)
 - [**(Edwards, S. (1985)) NBER WORKING PAPER SERIES THE PRICING OF BONDS AND BANK LOANS IN INTERNATIONAL MARKETS: AN EMPIRICAL ANALYSIS OF DEVELOPING COUNTRIES’ FOREIGN BORROWING.**](https://www.nber.org/system/files/working_papers/w1689/w1689.pdf)
-- **(2017). Efficient Capital Markets: A Review of Theory and Empirical Work** (https://www.google.com/search?q=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&rlz=1C5CHFA_enIN1117IN1117&oq=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzU2MWowajSoAgCwAgE&sourceid=chrome&ie=UTF-8)
+- [**(2017). Efficient Capital Markets: A Review of Theory and Empirical Work**](https://www.google.com/search?q=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&rlz=1C5CHFA_enIN1117IN1117&oq=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzU2MWowajSoAgCwAgE&sourceid=chrome&ie=UTF-8)
 
 ---
 
