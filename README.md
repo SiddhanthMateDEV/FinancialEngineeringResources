@@ -63,9 +63,9 @@ Since I have just started, I will be adding more stuff here, so keep checking it
 - **(Springer Texts in Statistics) Jun Shao** - *Mathematical Statistics* - Springer (2003)
 
 ### Problems
-- [(MIT OpenCourseWare) **Prof. John Tsitsiklis - Introduction to Probability**] - Massachusetts Institute of Technology (https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/)
-- [(Yale University) **Prof. Joseph Chang - Stochastic Processes - Yale University**] (http://www.stat.yale.edu/~pollard/Courses/251.spring2013/Handouts/Chang-notes.pdf)
-- [(Harvard University) **Prof. Joe Blitzstein - Statistics 110: Probability - Harvard University**] (https://projects.iq.harvard.edu/stat110/strategic-practice-problems)
+- [(MIT OpenCourseWare) **Prof. John Tsitsiklis - Introduction to Probability** - Massachusetts Institute of Technology](https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/)
+- [(Yale University) **Prof. Joseph Chang - Stochastic Processes - Yale University**](http://www.stat.yale.edu/~pollard/Courses/251.spring2013/Handouts/Chang-notes.pdf)
+- [(Harvard University) **Prof. Joe Blitzstein - Statistics 110: Probability - Harvard University**](https://projects.iq.harvard.edu/stat110/strategic-practice-problems)
 - [(MIT) **Graph Theory And Additive Combinatorics MIT18_217F19**](https://ocw.mit.edu/courses/18-225-graph-theory-and-additive-combinatorics-fall-2023/pages/problem-sets/)
 
 ---
