@@ -134,6 +134,9 @@ Since I have just started, I will be adding more stuff here, so keep checking it
 - QuantInsti
 - Mark Meldrum
 
+### Free Courses
+- [MIT OpenCourseWare](https://ocw.mit.edu/)
+
 ---
 
 ### Discussions
