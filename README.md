@@ -38,7 +38,7 @@ Since I have just started, I will be adding more stuff here, so keep checking it
 - **Robert Jarrow** - *Modeling Fixed-Income Securities and Interest Rate Options* - Stanford University Press (2002)
 - **Guojun Gan, Chaoqun Ma, and Hong Xie** - *Measure, Probability, and Mathematical Finance: A Problem-Oriented Approach* - Wiley
 - **Paul Wilmott, Sam Howison, and Jeff Dewynne** - *The Mathematics of Financial Derivatives: A Student Introduction* - Cambridge University Press (1995)
-Studying finance, especially the quantitative aspects related to derivatives, interest rate models, and stochastic calculus, can be challenging yet rewarding. Based on the books you’ve listed, I can suggest some lecture notes and problem sets to help you deepen your understanding of these topics. Here are some resources, organized by topic and linked to the relevant materials online.
+
 
 ### Lectures
 - [Derivatives Markets](https://www.lse.ac.uk/resources/calendar2013-2014/courseGuides/FM/2013_FM320.htm) by the London School of Economics: Comprehensive notes on futures, options, and the Black-Scholes model.
