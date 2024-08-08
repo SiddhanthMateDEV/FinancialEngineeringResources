@@ -1,4 +1,4 @@
-#include "CSVReader.h"
+#include "./main.h"
 
 std::vector<StockData> CSVReader::EquityFileReader() {
     std::vector<StockData> stock_data;
