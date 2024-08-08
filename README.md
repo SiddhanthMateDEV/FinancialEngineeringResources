@@ -157,34 +157,36 @@ This directory contains various C++  header and overloading functions related to
 
 Some components or documentation has not been added but will be in the coming weeks.
 
-```
-LowFrequency/
+root/
 │
-├── Depreciation/
-│   └── main.py
+├── .vscode/
 │
-├── Economic/
-│   └── main.py
+├── cpp/
+│   ├── CSVReader/
+│   │   ├── main.cpp
+│   │   └── main.h
+│   │
+│   ├── main/
+│   │   ├── main.cpp
+│   │
+│   ├── straddle/
+│   │   ├── main.cpp
+│   │   └── main.h
+│   │
+│   ├── strangle/
+│   │   ├── main.cpp
+│   │   └── main.h
+│   │
+│   ├── ThreadMongoDB/
+│   │   ├── thread_mongodb.cpp
+│   │   └── thread_mongodb.h
+│   │
+│   └── timefuncs/
+│       ├── main.cpp
+│       └── main.h
 │
-├── options/
-│   ├── optionsFormulas/
-│   │   └── main.py
-│   └── readFileData/
-│       └── main.py
-│
-├── straddle/
-│   └── main.py
-│
-├── strangle/
-│   └── main.py
-│
-├── timeFuncs/
-│   └── main.py
-│
-├── utils/
-│
-└── venv/
-```
+└── Math/
+
 
 
 #### Descriptions: 
@@ -294,7 +296,7 @@ The header file also includes necessary library imports and a macro to set the s
 This directory contains various Python modules and packages related to low-frequency trading strategies, options calculations, and economic analysis. Below is an outline of the directory structure along with a brief description of each component.
 
 ```
-LowFrequency/
+root/
 │
 ├── Depreciation/
 │   └── main.py
