@@ -233,7 +233,6 @@ This header file defines two main structures, `StockData` and `OptionData`, whic
 
 The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
 
-
 ### Python Framework: (LFT/MFT applications)
 
 #### Directory Structure
@@ -241,7 +240,7 @@ The header file also includes necessary library imports and a macro to set the s
 This directory contains various Python modules and packages related to low-frequency trading strategies, options calculations, and economic analysis. Below is an outline of the directory structure along with a brief description of each component.
 
 ```
-root/
+LowFrequency/
 │
 ├── Depreciation/
 │   └── main.py
@@ -271,34 +270,50 @@ root/
 
 #### Descriptions
 
-##### Depreciation/
-- **main.py**: This module handles calculations related to asset depreciation.
+- **Depreciation**: (*./Depreciation/main.py*)
+  
+  This module handles calculations related to asset depreciation. It provides various methods to calculate the depreciation of different assets over time, taking into account factors such as the asset's initial value, useful life, and residual value.
 
-##### Economic/
-- **main.py**: This module includes economic analysis functions and calculations.
 
-##### options/
-- **optionsFormulas/**
-  - **main.py**: This module provides functions for various options pricing formulas.
-- **readFileData/**
-  - **main.py**: This module includes functions for reading and parsing options data files.
+- **Economic**: (*./Economic/main.py*)
+  
+  This module includes economic analysis functions and calculations. It contains methods for analyzing economic indicators, forecasting economic trends, and performing macroeconomic simulations.
 
-##### straddle/
-- **main.py**: This module implements strategies and calculations for straddle options trading.
 
-##### strangle/
-- **main.py**: This module implements strategies and calculations for strangle options trading.
+- **options**:
+  
+  - **optionsFormulas**: (*./options/optionsFormulas/main.py*)
+    
+    This module provides functions for various options pricing formulas. It includes implementations of the Black-Scholes model, binomial options pricing, and other advanced options pricing techniques.
 
-##### timeFuncs/
-- **main.py**: This module provides functions related to time-based calculations and utilities.
 
-##### utils/
-- This directory contains utility functions that are used across various modules.
+  - **readFileData**: (*./options/readFileData/main.py*)
+    
+    This module includes functions for reading and parsing options data files. It provides utilities to load data from CSV files, perform data cleaning, and prepare the data for analysis and modeling.
 
-##### venv/
-- This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated.---
 
----
+- **straddle**: (*./straddle/main.py*)
+  
+  This module implements strategies and calculations for straddle options trading. It includes methods to evaluate the profitability of straddle positions, calculate break-even points, and analyze risk.
+
+
+- **strangle**: (*./strangle/main.py*)
+  
+  This module implements strategies and calculations for strangle options trading. It includes methods to evaluate the profitability of strangle positions, calculate break-even points, and analyze risk.
+
+
+- **timeFuncs**: (*./timeFuncs/main.py*)
+  
+  This module provides functions related to time-based calculations and utilities. It includes methods to handle time series data, perform time-based aggregations, and manage date and time conversions.
+
+
+- **utils**:
+  
+  This directory contains utility functions that are used across various modules. It includes general-purpose functions for data manipulation, logging, configuration management, and other common tasks.
+
+- **venv**:
+  
+  This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.---
 
 ## 🔗 My Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
