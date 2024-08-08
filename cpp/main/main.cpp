@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "../CSVReader/main.h"
-#include "../instrumentStructures/main.h"
 
 #include <vector>
 #include <sstream>

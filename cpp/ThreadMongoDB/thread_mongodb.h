@@ -6,7 +6,7 @@
 #include "CSVReader.h"
 #include "StockData.h"
 
-
+// ignore this directory for now its based of some old code of mine
 class thread_mongodb{
     private:
         // for csv reader functions
