@@ -165,40 +165,36 @@ LowFrequency/
   This module includes economic analysis functions and calculations. It contains methods for analyzing economic indicators, forecasting economic trends, and performing macroeconomic simulations.
 
 
-- **options**:
+- [**options**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options)
   
-  - [**optionsFormulas**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/python/options)
+  - [**optionsFormulas**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/optionsFormulas)
     
     This module provides functions for various options pricing formulas. It includes implementations of the Black-Scholes model, binomial options pricing, and other advanced options pricing techniques.
 
 
-    - **readFileData**: 
+    - [**readFileData**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/readFileData) 
       
       This module includes functions for reading and parsing options data files. It provides utilities to load data from CSV files, perform data cleaning, and prepare the data for analysis and modeling.
 
 
-    - **straddle**:
+    - [**straddle**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/straddle)
     
       This module implements strategies and calculations for straddle options trading. It includes methods to evaluate the profitability of straddle positions, calculate break-even points, and analyze risk.
 
 
-    - **strangle**: 
+    - [**strangle**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/strangle) 
       
       This module implements strategies and calculations for strangle options trading. It includes methods to evaluate the profitability of strangle positions, calculate break-even points, and analyze risk.
 
 
-    - **timeFuncs**: 
+    - [**timeFuncs**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/timeFuncs) 
     
       This module provides functions related to time-based calculations and utilities. It includes methods to handle time series data, perform time-based aggregations, and manage date and time conversions.
 
 
-    - **utils**:
+    - [**utils**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/BackTestingFrameWork/python/options/utils)
       
       This directory contains utility functions that are used across various modules. It includes general-purpose functions for data manipulation, logging, configuration management, and other common tasks.
-
-    - **venv**:
-      
-      This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.
 
 ---
 
