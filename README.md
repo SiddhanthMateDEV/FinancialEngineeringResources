@@ -143,50 +143,50 @@ LowFrequency/
 
 #### Descriptions:
 
-- **Depreciation**: (*./Depreciation/main.py*)
+- [**Depreciation**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/python/options/Depreciation/main.py)
   
   This module handles calculations related to asset depreciation. It provides various methods to calculate the depreciation of different assets over time, taking into account factors such as the asset's initial value, useful life, and residual value.
 
 
-- **Economic**: (*./Economic/main.py*)
+- [**Economic**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/python/LowFrequency)
   
   This module includes economic analysis functions and calculations. It contains methods for analyzing economic indicators, forecasting economic trends, and performing macroeconomic simulations.
 
 
 - **options**:
   
-  - **optionsFormulas**: (*./options/optionsFormulas/main.py*)
+  - [**optionsFormulas**:](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/python/options)
     
     This module provides functions for various options pricing formulas. It includes implementations of the Black-Scholes model, binomial options pricing, and other advanced options pricing techniques.
 
 
-  - **readFileData**: (*./options/readFileData/main.py*)
+    - **readFileData**: 
+      
+      This module includes functions for reading and parsing options data files. It provides utilities to load data from CSV files, perform data cleaning, and prepare the data for analysis and modeling.
+
+
+    - **straddle**:
     
-    This module includes functions for reading and parsing options data files. It provides utilities to load data from CSV files, perform data cleaning, and prepare the data for analysis and modeling.
+      This module implements strategies and calculations for straddle options trading. It includes methods to evaluate the profitability of straddle positions, calculate break-even points, and analyze risk.
 
 
-- **straddle**: (*./straddle/main.py*)
-  
-  This module implements strategies and calculations for straddle options trading. It includes methods to evaluate the profitability of straddle positions, calculate break-even points, and analyze risk.
+    - **strangle**: 
+      
+      This module implements strategies and calculations for strangle options trading. It includes methods to evaluate the profitability of strangle positions, calculate break-even points, and analyze risk.
 
 
-- **strangle**: (*./strangle/main.py*)
-  
-  This module implements strategies and calculations for strangle options trading. It includes methods to evaluate the profitability of strangle positions, calculate break-even points, and analyze risk.
+    - **timeFuncs**: 
+    
+      This module provides functions related to time-based calculations and utilities. It includes methods to handle time series data, perform time-based aggregations, and manage date and time conversions.
 
 
-- **timeFuncs**: (*./timeFuncs/main.py*)
-  
-  This module provides functions related to time-based calculations and utilities. It includes methods to handle time series data, perform time-based aggregations, and manage date and time conversions.
+    - **utils**:
+      
+      This directory contains utility functions that are used across various modules. It includes general-purpose functions for data manipulation, logging, configuration management, and other common tasks.
 
-
-- **utils**:
-  
-  This directory contains utility functions that are used across various modules. It includes general-purpose functions for data manipulation, logging, configuration management, and other common tasks.
-
-- **venv**:
-  
-  This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.
+    - **venv**:
+      
+      This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.
 
 ---
 
