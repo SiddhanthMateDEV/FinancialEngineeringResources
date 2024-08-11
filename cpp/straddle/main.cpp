@@ -28,30 +28,31 @@ std::vector<OptionData> Straddle::CallDataVec(){
                                                     expiry_month,
                                                     expiry_year);
 
+    try {
+        for(const auto& data: OptionDataVec){
+            const std::tm& curr_time = data.datetime;
+            const int& strike_price = data.strike_price;
+            const std::string& option_type = data.option_type;
 
-    
+            auto current_time_tuple = std::make_tuple(curr_time.tm_mon,
+                                                curr_time.tm_mday,
+                                                curr_time.tm_year);
 
-    for(const auto& data: OptionDataVec){
-        const std::tm& curr_time = data.datetime;
-        const int& strike_price = data.strike_price;
-        const std::string& option_type = data.option_type;
-
-        auto current_time_tuple = std::make_tuple(curr_time.tm_mon,
-                                            curr_time.tm_mday,
-                                            curr_time.tm_year);
-
-        if((current_time_tuple == expiry_date_tuple) && (strike_price==this->strike_price) && (option_type == this->call_symbol)){
-            FilteredCallData.push_back(data);
+            if((current_time_tuple == expiry_date_tuple) && (strike_price==this->strike_price) && (option_type == this->call_symbol)){
+                FilteredCallData.push_back(data);
+            }
         }
+    } catch(const std::runtime_error& error) {
+        throw std::runtime_error("Error Iterating Through Vector In CallDataVec() In Straddle Class");
     }
-
     return FilteredCallData;
 }
+
 
 std::vector<OptionData> Straddle::PutDataVec(){
 
     if(OptionDataVec.empty()){
-        throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty");
+        throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty In Straddle Class");
     }
     
 
@@ -66,29 +67,29 @@ std::vector<OptionData> Straddle::PutDataVec(){
     if(expiry_day < 0 || expiry_day > 31 ||
         expiry_month < 1 || expiry_month > 12 || 
         expiry_year < 2000 || expiry_year > 2030){
-            throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
+            throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors In Straddle Class");
     }
 
 
     const auto expiry_date_tuple = std::make_tuple(expiry_day,
                                                     expiry_month,
                                                     expiry_year);
+    try {
+        for(const auto& data: OptionDataVec){
+            const std::tm& curr_time = data.datetime;
+            const int& strike_price = data.strike_price;
+            const std::string& option_type = data.option_type;
 
+            auto current_time_tuple = std::make_tuple(curr_time.tm_mon,
+                                                curr_time.tm_mday,
+                                                curr_time.tm_year);
 
-    
-
-    for(const auto& data: OptionDataVec){
-        const std::tm& curr_time = data.datetime;
-        const int& strike_price = data.strike_price;
-        const std::string& option_type = data.option_type;
-
-        auto current_time_tuple = std::make_tuple(curr_time.tm_mon,
-                                            curr_time.tm_mday,
-                                            curr_time.tm_year);
-
-        if((current_time_tuple == expiry_date_tuple) && (strike_price==this->strike_price) && (option_type == this->put_symbol)){
-            FilteredPutData.push_back(data);
+            if((current_time_tuple == expiry_date_tuple) && (strike_price==this->strike_price) && (option_type == this->put_symbol)){
+                FilteredPutData.push_back(data);
+            }
         }
+    } catch(const std::runtime_error& error) {
+        throw std::runtime_error("Error Iterating Through Vector In PutDataVec() In Straddle Class");
     }
     return FilteredPutData;
 }
