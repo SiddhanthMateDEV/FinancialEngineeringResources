@@ -1,8 +1,16 @@
 #include "main.h"
 #include <ctime>
-#define START_YEAR 2000
-#define CURRENT_YEAR 2024
 
+
+// Boundary conditions
+// Here the start year is set according to the FNO start date in India
+#define START_YEAR 2000
+// This must be changed at the end of each year
+#define CURRENT_YEAR 2024
+#define MAX_DAYS 31
+#define MIN_DAYS 1
+#define MAX_MONTH 12
+#define MIN_MONTH 1
 
 
 // This function could be more faster with lambda, however I do not know how to do that, if someone does please reach out about this
@@ -11,7 +19,6 @@ std::vector<OptionData> Strangle::CallDataVec(){
         throw std::invalid_argument("OptionDataVec Passed To CallDataVec() Is Empty");
     }
     
-
     std::vector<OptionData> FilteredCallData;
     FilteredCallData.reserve(OptionDataVec.size());
 
@@ -19,13 +26,11 @@ std::vector<OptionData> Strangle::CallDataVec(){
     const int expiry_month = this->expiry.tm_mon;
     const int expiry_year = this->expiry.tm_year;
 
-
-    if(expiry_day < 0 || expiry_day > 31 ||
-        expiry_month < 1 || expiry_month > 12 || 
-        expiry_year < START_YEAR || expiry_year > CURRENT_YEAR){
+    if((expiry_day < MIN_DAYS) || (expiry_day > MAX_DAYS) ||
+        (expiry_month < MIN_MONTH) || (expiry_month > MAX_MONTH) || 
+        (expiry_year < START_YEAR) || (expiry_year > CURRENT_YEAR)){
             throw std::invalid_argument("expiry Passed To CallDataVec() Is Causing Errors");
     }
-
 
     const auto expiry_date_tuple = std::make_tuple(expiry_day,
                                                     expiry_month,
@@ -58,7 +63,6 @@ std::vector<OptionData> Strangle::PutDataVec(){
         throw std::invalid_argument("OptionDataVec Passed To PutDataVec() Is Empty In Strangle Class");
     }
     
-
     std::vector<OptionData> FilteredPutData;
     FilteredPutData.reserve(OptionDataVec.size());
 
@@ -66,19 +70,15 @@ std::vector<OptionData> Strangle::PutDataVec(){
     const int expiry_month = this->expiry.tm_mon;
     const int expiry_year = this->expiry.tm_year;
 
-
-    if(expiry_day < 0 || expiry_day > 31 ||
-        expiry_month < 1 || expiry_month > 12 || 
-        expiry_year < 2000 || expiry_year > 2030){
+    if((expiry_day < MIN_DAYS) || (expiry_day > MAX_DAYS) ||
+        (expiry_month < MIN_MONTH) || (expiry_month > MAX_MONTH) || 
+        (expiry_year < START_YEAR) || (expiry_year > CURRENT_YEAR)){
             throw std::invalid_argument("expiry Passed To PutDataVec() Is Causing Errors In Strangle Class");
     }
-
 
     const auto expiry_date_tuple = std::make_tuple(expiry_day,
                                                     expiry_month,
                                                     expiry_year);
-
-
     
     try {
         for(const auto& data: OptionDataVec){

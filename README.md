@@ -197,8 +197,20 @@ root/
 - [**The CSV Reader Directory**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/cpp/CSVReader/main.h)
 ##### This folder contains the header file for the functionality which will be overloaded by the main.cpp in the same sub-directory:
 
-The first aspect of the header file `./cpp/CSVReader/main.h` is the structs defined at the beginning:
+This includes the `CSVReader` class, which provides methods to read and parse CSV files containing either stock or option data. The `CSVReader` class has two methods:
 
+- `EquityFileReader`: Reads and parses stock data from a CSV file.
+- `OptionsFileReader`: Reads and parses option data from a CSV file.
+
+The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
+
+#### Descriptions: 
+
+##### InstrumentStruct/
+- [**The Instrument Structure Directory**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/cpp/InstrumentStruct)
+##### This folder contains the header files which holds the structures of how Options Data and Equity Data
+
+`StockStruct.h` contains the structure for holding equity data.
 ```cpp
 struct StockData{
     std::string date;
@@ -211,7 +223,11 @@ struct StockData{
     std::string ticker;
     std::tm datetime; 
 };
+```
 
+`OptionStruct.h` contains the structure for holding option data.
+
+```cpp
 struct OptionData{
     std::string ticker;
     std::string date;
@@ -226,12 +242,6 @@ struct OptionData{
 };
 ```
 
-This header file defines two main structures, `StockData` and `OptionData`, which hold the respective data for stocks and options. Additionally, it includes the `CSVReader` class, which provides methods to read and parse CSV files containing either stock or option data. The `CSVReader` class has two methods:
-
-- `EquityFileReader`: Reads and parses stock data from a CSV file.
-- `OptionsFileReader`: Reads and parses option data from a CSV file.
-
-The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
 
 ### Python Framework: (LFT/MFT applications)
 

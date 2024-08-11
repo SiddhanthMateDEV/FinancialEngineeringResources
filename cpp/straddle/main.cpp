@@ -1,6 +1,16 @@
 #include "main.h"
 #include <ctime>
 
+// Boundary conditions
+// Here the start year is set according to the FNO start date in India
+#define START_YEAR 2000
+// This must be changed at the end of each year
+#define CURRENT_YEAR 2024
+#define MAX_DAYS 31
+#define MIN_DAYS 1
+#define MAX_MONTH 12
+#define MIN_MONTH 1
+
 
 // This function could be more faster with lambda, however I do not know how to do that, if someone does please reach out about this
 std::vector<OptionData> Straddle::CallDataVec(){             
@@ -8,7 +18,6 @@ std::vector<OptionData> Straddle::CallDataVec(){
         throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty");
     }
     
-
     std::vector<OptionData> FilteredCallData;
     FilteredCallData.reserve(OptionDataVec.size());
 
@@ -16,13 +25,11 @@ std::vector<OptionData> Straddle::CallDataVec(){
     int expiry_month = this->expiry.tm_mon;
     int expiry_year = this->expiry.tm_year;
 
-
-    if(expiry_day < 0 || expiry_day > 31 ||
-        expiry_month < 1 || expiry_month > 12 || 
-        expiry_year < 2000 || expiry_year > 2030){
+    if((expiry_day < MIN_DAYS ) || (expiry_day > MAX_DAYS) ||
+        (expiry_month < MIN_MONTH) || (expiry_month > MAX_MONTH) || 
+        (expiry_year < START_YEAR) || (expiry_year > CURRENT_YEAR)){
             throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
     }
-
 
     const auto expiry_date_tuple = std::make_tuple(expiry_day,
                                                     expiry_month,
@@ -55,7 +62,6 @@ std::vector<OptionData> Straddle::PutDataVec(){
         throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty In Straddle Class");
     }
     
-
     std::vector<OptionData> FilteredPutData;
     FilteredPutData.reserve(OptionDataVec.size());
 
@@ -63,17 +69,16 @@ std::vector<OptionData> Straddle::PutDataVec(){
     int expiry_month = this->expiry.tm_mon;
     int expiry_year = this->expiry.tm_year;
 
-
-    if(expiry_day < 0 || expiry_day > 31 ||
-        expiry_month < 1 || expiry_month > 12 || 
-        expiry_year < 2000 || expiry_year > 2030){
+    if((expiry_day < MIN_DAYS) || (expiry_day > MAX_DAYS) ||
+        (expiry_month < MIN_MONTH) || (expiry_month > MAX_MONTH) || 
+        (expiry_year < START_YEAR) || (expiry_year > CURRENT_YEAR)){
             throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors In Straddle Class");
     }
-
 
     const auto expiry_date_tuple = std::make_tuple(expiry_day,
                                                     expiry_month,
                                                     expiry_year);
+                                                    
     try {
         for(const auto& data: OptionDataVec){
             const std::tm& curr_time = data.datetime;
