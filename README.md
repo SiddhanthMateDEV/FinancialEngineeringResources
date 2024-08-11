@@ -323,8 +323,9 @@ LowFrequency/
 
 - **venv**:
   
-  This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.---
+  This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.
 
+---
 
 ## Trading Infrastructure:
 
