@@ -17,12 +17,12 @@ The materials are organized by topics, with each section containing curated reso
 
 In addition to theoretical knowledge, this repository also offers practical support in Python, C++, and other programming languages. It includes a variety of functions and utilities that are essential for financial engineering tasks, such as:
 
-- **Data Reading and Processing**
-- **Option Pricing Methods**
-- **Straddle Calculation and Analysis**
-- **Strangle Calculation and Analysis**
-- **Time-Based Filtering Functions**
-- **Trading Strategies Implementation**
+  - **Data Reading and Processing**
+  - **Option Pricing Methods**
+  - **Straddle Calculation and Analysis**
+  - **Strangle Calculation and Analysis**
+  - **Time-Based Filtering Functions**
+  - **Trading Strategies Implementation**
 
 This repository serves as a valuable resource for anyone looking to deepen their understanding of Financial Engineering or to apply these concepts in real-world scenarios.
 
@@ -77,8 +77,8 @@ cpp/
 
 This includes the `CSVReader` class, which provides methods to read and parse CSV files containing either stock or option data. The `CSVReader` class has two methods:
 
-- `EquityFileReader`: Reads and parses stock data from a CSV file.
-- `OptionsFileReader`: Reads and parses option data from a CSV file.
+  - `EquityFileReader`: Reads and parses stock data from a CSV file.
+  - `OptionsFileReader`: Reads and parses option data from a CSV file.
 
 The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
 
@@ -229,25 +229,25 @@ TradingInfrastructure/
 
 ```
 #### The Documentation:
-- [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
+  - [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
 
 #### `config`: Contains the two folders one for the config of products distributed by xts and the other is routes, which contains the paths for getting different api related backend functionality.
-- [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/config)
+  - [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/config)
 
 #### `login`: Manages host look up and login to obtain authetication token and the token for each session.
-- [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/login)
+  - [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/login)
 
 #### `market_data_api`: Provides example usage of the Market Data functionalities.
-- [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/market_data_api)
+  - [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/market_data_api)
 
 #### `subscribe`: This contains a list of dictionaries of the exchange segment and instrument of id for whose id data will be subscribed.
-- [**Subscribe Payload**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/subscribe)
+  - [**Subscribe Payload**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/subscribe)
 
 #### `web_socket`: Initializes the websocket instance to listen for data packets.
-- [**WebSocket Instance**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/web_socket)
+  - [**WebSocket Instance**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/web_socket)
 
 #### `xts_message_codes`: Contains a list of all the codes of xts market data events.
-- [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/xts_message_codes)
+  - [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/xts_message_codes)
 
 #### C++ Market Data API Code Reference for XTS By TT Blaze API:
 
@@ -273,34 +273,34 @@ TradingInfrastructure/
                 └── xts_message_codes/
 ```
 #### The Documentation:
-- [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
+  - [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
 
 #### `config`: Contains the two folders one for the config of products distributed by xts and the other is routes, which contains the paths for getting different api related backend functionality.
-- [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/config)
+  - [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/config)
 
 #### `login`: Manages host look up and login to obtain authetication token and the token for each session.
-- [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/login)
+  - [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/login)
 
 #### `market_data_api`: Provides example usage of the Market Data functionalities.
-- [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/market_data_api)
+  - [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/market_data_api)
 
 #### `subscribe`: This contains a list of dictionaries of the exchange segment and instrument of id for whose id data will be subscribed.
-- [**Subscribe Payload**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/subscribe)
+  - [**Subscribe Payload**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/subscribe)
 
 #### `web_socket`: Initializes the websocket instance to listen for data packets.
-- [**WebSocket Instance**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/web_socket)
+  - [**WebSocket Instance**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/web_socket)
 
 #### `xts_message_codes`: Contains a list of all the codes of xts market data events.
-- [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/xts_message_codes)
+  - [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/xts_message_codes)
 
 ---
 ## Acknowledgements
 
 I just want to extend my heartfelt thanks to everyone who has supported me on this journey. I haven’t logged as many hours as some in the quant world, but the experience I've gained has been invaluable in building this repository. Here's why I put this together:
 
-- I get it—learning to be a quant is tough, and while I'm not claiming to be the best, I'm committed to continuing this journey and sharing what I know.
+  - I get it—learning to be a quant is tough, and while I'm not claiming to be the best, I'm committed to continuing this journey and sharing what I know.
 
-- Starting out can feel overwhelming with questions like "Where do I even begin?" or "What do I need to know?" or "Which project should I tackle first?" These were the exact questions that stumped me initially. My hope is that this repository can help answer those questions. If the feedback is positive, I’m thinking of starting a Discord channel to offer more personalized help on weekends or whenever I can.
+  - Starting out can feel overwhelming with questions like "Where do I even begin?" or "What do I need to know?" or "Which project should I tackle first?" These were the exact questions that stumped me initially. My hope is that this repository can help answer those questions. If the feedback is positive, I’m thinking of starting a Discord channel to offer more personalized help on weekends or whenever I can.
 
 ---
 
