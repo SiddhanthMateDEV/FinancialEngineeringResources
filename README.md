@@ -39,39 +39,34 @@ This directory contains various C++  header and overloading functions related to
 Some components or documentation has not been added but will be in the coming weeks.
 
 ```
-root/
-│
-├── .vscode/
-│
-├── cpp/
-│   ├── CSVReader/
-│   │   ├── main.cpp
-│   │   └── main.h
-│   │
-│   ├── main/
-│   │   ├── main.cpp
-│   │
-│   ├── straddle/
-│   │   ├── main.cpp
-│   │   └── main.h
-│   │
-│   ├── InstrumentStruct/
-│   │   ├── OptionStruct.h
-│   │   └── StockStruct.h
-│   │
-│   ├── strangle/
-│   │   ├── main.cpp
-│   │   └── main.h
-│   │
-│   ├── ThreadMongoDB/
-│   │   ├── thread_mongodb.cpp
-│   │   └── thread_mongodb.h
-│   │
-│   └── timefuncs/
-│       ├── main.cpp
-│       └── main.h
-│
-└── Math/
+
+── cpp/
+    ├── CSVReader/
+    │   ├── main.cpp
+    │   └── main.h
+    │
+    ├── main/
+    │   ├── main.cpp
+    │
+    ├── straddle/
+    │   ├── main.cpp
+    │   └── main.h
+    │
+    ├── InstrumentStruct/
+    │   ├── OptionStruct.h
+    │   └── StockStruct.h
+    │
+    ├── strangle/
+    │   ├── main.cpp
+    │   └── main.h
+    │
+    ├── ThreadMongoDB/    │   ├── thread_mongodb.cpp
+    │   └── thread_mongodb.h
+    │
+    └── timefuncs/
+        ├── main.cpp
+        └── main.h
+
 ```
 
 
