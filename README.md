@@ -147,7 +147,7 @@ I just want to extend my heartfelt thanks to everyone who has supported me on th
 ---
 
 
-## Code Reference
+## Formulas/BackTesting Code
 
 ### C++ Framework: (Low Latency/HFT applications)
 
@@ -197,7 +197,6 @@ root/
 
 #### Descriptions: 
 
-##### CSVReader/main.h
 - [**The CSV Reader Directory**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/cpp/CSVReader/main.h)
 ##### This folder contains the header file for the functionality which will be overloaded by the main.cpp in the same sub-directory:
 
@@ -208,7 +207,6 @@ This includes the `CSVReader` class, which provides methods to read and parse CS
 
 The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
 
-##### InstrumentStruct/
 - [**The Instrument Structure Directory**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/cpp/InstrumentStruct)
 ##### This folder contains the header files which holds the structures of how Options Data and Equity Data
 
@@ -280,7 +278,7 @@ LowFrequency/
 └── venv/
 ```
 
-#### Descriptions
+#### Descriptions:
 
 - **Depreciation**: (*./Depreciation/main.py*)
   
@@ -327,6 +325,49 @@ LowFrequency/
   
   This directory contains the virtual environment for the project, ensuring that dependencies are managed and isolated. It is essential for maintaining consistent development environments and avoiding conflicts between package versions.---
 
-## 🔗 My Links
+
+## Trading Infrastructure:
+
+### India:
+
+#### Python Market Data API Code Reference for XTS By TT Blaze API:
+
+#### Directory Structure:
+
+This repository contains the implementation of the TT Blaze Market Data API using Python. The API provides real-time stock market data, instrument subscriptions, market depth events, candle data, open interest events, and more.
+
+```
+TradingInfrastructure/
+└── India/
+    └── MarketData/
+        └── XTS_TT_BLAZE/
+            └── Python/
+                ├── config/
+                ├── data/
+                ├── database_operations/
+                ├── login/
+                ├── market_data_api/
+                ├── subscribe/
+                ├── web_socket/
+                └── xts_message_codes/
+
+```
+#### The Documentation:
+- [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
+
+#### `config`: Contains the two folders one for the config of products distributed by xts and the other is routes, which contains the paths for getting different api related backend functionality.
+
+#### `login`: Manages host look up and login to obtain authetication token and the token for each session.
+
+#### `market_data_api`: Provides example usage of the Market Data functionalities.
+
+#### `subscribe`: This contains a list of dictionaries of the exchange segment and instrument of id for whose id data will be subscribed.
+
+#### `web_socket`: Initializes the websocket instance to listen for data packets.
+
+#### `xts_message_codes`: Contains a list of all the codes of xts market data events.
+
+
+## 🔗 My Links:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
 [![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/SiddhanthMate)
