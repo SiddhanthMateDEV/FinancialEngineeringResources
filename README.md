@@ -356,17 +356,22 @@ TradingInfrastructure/
 - [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
 
 #### `config`: Contains the two folders one for the config of products distributed by xts and the other is routes, which contains the paths for getting different api related backend functionality.
+- [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/config)
 
 #### `login`: Manages host look up and login to obtain authetication token and the token for each session.
+- [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/login)
 
 #### `market_data_api`: Provides example usage of the Market Data functionalities.
+- [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/market_data_api)
 
 #### `subscribe`: This contains a list of dictionaries of the exchange segment and instrument of id for whose id data will be subscribed.
+- [**Subscribe Payload**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/subscribe)
 
 #### `web_socket`: Initializes the websocket instance to listen for data packets.
+- [**WebSocket Instance**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/web_socket)
 
 #### `xts_message_codes`: Contains a list of all the codes of xts market data events.
-
+- [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/xts_message_codes)
 
 ## 🔗 My Links:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
