@@ -2,11 +2,13 @@
 #include <ctime>
 #include <iostream>
 
-std::tm OptionsTimeFunctions::SetEndOfDay(){
+std::tm OptionsTimeFunctions::SetEndOfDay(const int& hour,
+                                          const int& minute,
+                                          const int& second){
     std::tm eod_tm;
-    eod_tm.tm_hour = this->hour;
-    eod_tm.tm_min = this->min;
-    eod_tm.tm_sec = this->sec;
+    eod_tm.tm_hour = hour;
+    eod_tm.tm_min = minute;
+    eod_tm.tm_sec = second;
     return eod_tm;
 }
 
@@ -16,6 +18,11 @@ std::vector<OptionData> TimeFilter(const std::vector<OptionData>& OptionDataVec,
                                     const std::tm& start_trade_time,
                                     const std::tm& end_trade_time){
                             
+            if(OptionDataVec.empty()){
+                throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty");
+            }
+            
+
             std::vector<OptionData> FilteredData;
             FilteredData.reserve(OptionDataVec.size());
 
@@ -28,6 +35,18 @@ std::vector<OptionData> TimeFilter(const std::vector<OptionData>& OptionDataVec,
             int start_sec = start_trade_time.tm_sec;
             int end_sec = end_trade_time.tm_sec;
 
+            if(start_hour < 0 || start_hour > 23 ||
+                start_min < 0 || start_min > 59 || 
+                start_sec < 0 || start_sec >59){
+                    throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
+            }
+
+            if(end_hour < 0 || end_hour > 23 ||
+                end_min < 0 || end_min > 59 || 
+                end_sec < 0 || end_sec >59){
+                    throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
+            }
+
             const auto start_time_tuple = std::make_tuple(start_hour,
                                                           start_min,
                                                           start_sec);
@@ -35,6 +54,8 @@ std::vector<OptionData> TimeFilter(const std::vector<OptionData>& OptionDataVec,
             const auto end_time_tuple = std::make_tuple(end_hour,
                                                         end_min,
                                                         end_sec);
+
+            
 
             for(const auto& data: OptionDataVec){
                 const std::tm& curr_time = data.datetime;
