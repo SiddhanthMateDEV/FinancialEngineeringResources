@@ -174,6 +174,10 @@ root/
 │   │   ├── main.cpp
 │   │   └── main.h
 │   │
+│   ├── InstrumentStruct/
+│   │   ├── OptionStruct.h
+│   │   └── StockStruct.h
+│   │
 │   ├── strangle/
 │   │   ├── main.cpp
 │   │   └── main.h
@@ -203,8 +207,6 @@ This includes the `CSVReader` class, which provides methods to read and parse CS
 - `OptionsFileReader`: Reads and parses option data from a CSV file.
 
 The header file also includes necessary library imports and a macro to set the seconds in the datetime field to `00` if not already set.
-
-#### Descriptions: 
 
 ##### InstrumentStruct/
 - [**The Instrument Structure Directory**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/cpp/InstrumentStruct)
