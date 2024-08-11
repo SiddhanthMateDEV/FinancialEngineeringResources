@@ -8,6 +8,24 @@
 
 - [@SiddhanthMateDEV](https://www.github.com/SiddhanthMateDEV)
 ---
+
+# Financial Engineering Resources
+
+This repository is a comprehensive collection of study materials and tools focused on Financial Engineering. It is structured to support both learning and practical application across key areas such as Finance, Probability & Statistics, and Programming.
+
+The materials are organized by topics, with each section containing curated resources, including books, lecture notes, research papers, and problem sets. These resources are designed to build a strong foundation and advance your knowledge in Financial Engineering.
+
+In addition to theoretical knowledge, this repository also offers practical support in Python, C++, and other programming languages. It includes a variety of functions and utilities that are essential for financial engineering tasks, such as:
+
+- **Data Reading and Processing**
+- **Option Pricing Methods**
+- **Straddle Calculation and Analysis**
+- **Strangle Calculation and Analysis**
+- **Time-Based Filtering Functions**
+- **Trading Strategies Implementation**
+
+This repository serves as a valuable resource for anyone looking to deepen their understanding of Financial Engineering or to apply these concepts in real-world scenarios.
+
 ---
 
 ## Formulas/BackTesting Code
@@ -265,21 +283,6 @@ TradingInfrastructure/
 #### The Documentation:
 - [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
 
----
-
-# Financial Engineering Resources
-
-This repository contains a collection of study materials organized by topics, including Finance, Probability & Statistics, and Programming. Each topic contains books, lecture notes, research papers, and problem sets to support learning and research.
-
-The above mentioned resources converge at the discipline of "Financial Engineering".
-
-Apart from this it will contain python, c++, and other language support related, functionalities such as:
-- **Reading Data**
-- **Option Pricing Methods**
-- **Straddle Related Functions**
-- **Strangle Related Functions**
-- **Time Filter Functions**
-- **Strategies**
 ---
 ## Acknowledgements
 
