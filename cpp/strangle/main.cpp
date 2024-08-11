@@ -1,11 +1,14 @@
 #include "main.h"
 #include <ctime>
+#define START_YEAR 2000
+#define CURRENT_YEAR 2024
+
 
 
 // This function could be more faster with lambda, however I do not know how to do that, if someone does please reach out about this
 std::vector<OptionData> Strangle::CallDataVec(){             
     if(OptionDataVec.empty()){
-        throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty");
+        throw std::invalid_argument("OptionDataVec Passed To CallDataVec() Is Empty");
     }
     
 
@@ -19,8 +22,8 @@ std::vector<OptionData> Strangle::CallDataVec(){
 
     if(expiry_day < 0 || expiry_day > 31 ||
         expiry_month < 1 || expiry_month > 12 || 
-        expiry_year < 2000 || expiry_year > 2030){
-            throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
+        expiry_year < START_YEAR || expiry_year > CURRENT_YEAR){
+            throw std::invalid_argument("expiry Passed To CallDataVec() Is Causing Errors");
     }
 
 
@@ -51,7 +54,7 @@ std::vector<OptionData> Strangle::CallDataVec(){
 std::vector<OptionData> Strangle::PutDataVec(){
 
     if(OptionDataVec.empty()){
-        throw std::invalid_argument("OptionDataVec Passed To TimeFilter() Is Empty");
+        throw std::invalid_argument("OptionDataVec Passed To PutDataVec() Is Empty");
     }
     
 
@@ -66,7 +69,7 @@ std::vector<OptionData> Strangle::PutDataVec(){
     if(expiry_day < 0 || expiry_day > 31 ||
         expiry_month < 1 || expiry_month > 12 || 
         expiry_year < 2000 || expiry_year > 2030){
-            throw std::invalid_argument("start_trade_time Passed To TimeFilter() Is Causing Errors");
+            throw std::invalid_argument("expiry Passed To PutDataVec() Is Causing Errors");
     }
 
 
