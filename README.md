@@ -59,7 +59,8 @@ cpp/
 │   ├── main.cpp
 │   └── main.h
 │
-├── ThreadMongoDB/    │   ├── thread_mongodb.cpp
+├── ThreadMongoDB/    
+|   ├── thread_mongodb.cpp
 │   └── thread_mongodb.h
 │
 └── timefuncs/
