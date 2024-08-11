@@ -334,7 +334,7 @@ LowFrequency/
 
 #### Directory Structure:
 
-This repository contains the implementation of the TT Blaze Market Data API using Python. The API provides real-time stock market data, instrument subscriptions, market depth events, candle data, open interest events, and more.
+This repository contains the implementation of the TT Blaze Market Data API using Python. The API provides real-time stock market data, instrument subscriptions, market depth events, candle data, open interest events, and more. This code is meant for Low/Mid Frequency Trading Infrastructure.
 
 ```
 TradingInfrastructure/
@@ -372,6 +372,35 @@ TradingInfrastructure/
 
 #### `xts_message_codes`: Contains a list of all the codes of xts market data events.
 - [**XTS Message Codes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/Python/xts_message_codes)
+
+#### C++ Market Data API Code Reference for XTS By TT Blaze API:
+
+#### Directory Structure:
+
+This repository contains the implementation of the TT Blaze Market Data API using C++. The API provides real-time stock market data, instrument subscriptions, market depth events, candle data, open interest events, and more. This code is meant for High Frequency Trading Infrastructure.
+
+Still being made!
+
+```
+TradingInfrastructure/
+└── India/
+    └── MarketData/
+        └── XTS_TT_BLAZE/
+            └── C++/
+               ├── .vscode/
+               ├── config/
+               ├── data/
+               ├── db_op/
+               ├── login/
+               ├── market_data_api/
+               ├── subscribe/
+               ├── testCPP_CURL/
+               ├── web_soc/
+               └── xts_message_codes/
+```
+#### The Documentation:
+- [XTS Documentation By TT Blaze API](https://ttblaze.iifl.com/doc/marketdata/)
+
 
 ## 🔗 My Links:
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/siddhanth-mate-9b0127222/)
