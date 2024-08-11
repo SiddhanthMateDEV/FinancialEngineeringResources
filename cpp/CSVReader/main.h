@@ -7,7 +7,9 @@
 #include <fstream>
 #include <sstream>
 
-#include <string>
+#include "../InstrumentStruct/OptionStruct.h"
+#include "../InstrumentStruct/StockStruct.h"
+
 #include <vector>
 
 #include <stdexcept>
@@ -18,36 +20,6 @@
 
 #include <string>
 #include <ctime>
-
-
-// Structures required
-// if needed add your own or customise it here
-struct StockData{
-    std::string date;
-    std::string time;
-    double open;
-    double high;
-    double low;
-    double close;
-    long int volume;
-    std::string ticker;
-    std::tm datetime; 
-};
-
-struct OptionData{
-    std::string ticker;
-    std::string date;
-    std::string time;
-    double open;
-    double high;
-    double low;
-    double close;
-    long int volume;
-    long int openInterest;
-    std::tm datetime;
-};
-
-
 
 class CSVReader{
     private:
