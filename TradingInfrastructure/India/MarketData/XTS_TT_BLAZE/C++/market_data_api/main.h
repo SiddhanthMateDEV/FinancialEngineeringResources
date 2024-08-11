@@ -6,6 +6,8 @@
 
 #include "../InstrumentStructures/IndexListCashMarket.h"
 #include "../InstrumentStructures/SeriesFNOList.h"
+#include "../InstrumentStructures/ExpiryList.h"
+#include "../InstrumentStructures/MasterDataStruct.h"
 
 class MarketDataAPIFunctions {
     private:
@@ -21,6 +23,7 @@ class MarketDataAPIFunctions {
         std::string InstrumentType;
         std::vector<CashListStruct> CashList;
         std::vector<fnoListStruct> SeriesFNOList;
+        std::vector<ExpiryListStruct> expiryList;
         // std::string exchangeSegment;
         // int xtsMessageCode;
 
@@ -39,6 +42,8 @@ class MarketDataAPIFunctions {
         void ClientConfigResponse();
         void IndexListResponse();
         void SeriesListResponse();
+        std::vector<ExpiryListStruct> ExpiryList();
+        std::vector<MasterDataStruct> MasterDataResponse();
 };
 
 
