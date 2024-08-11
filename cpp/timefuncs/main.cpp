@@ -1,6 +1,6 @@
 #include "main.h"
 #include <ctime>
-#include <
+#include <iostream>
 
 std::tm OptionsTimeFunctions::SetEndOfDay(){
     std::tm eod_tm;
@@ -10,6 +10,8 @@ std::tm OptionsTimeFunctions::SetEndOfDay(){
     return eod_tm;
 }
 
+
+// This function could be more faster with lambda, however I do not know how to do that, if someone does please reach out about this
 std::vector<OptionData> TimeFilter(const std::vector<OptionData>& OptionDataVec,
                                     const std::tm& start_trade_time,
                                     const std::tm& end_trade_time){
@@ -45,4 +47,6 @@ std::vector<OptionData> TimeFilter(const std::vector<OptionData>& OptionDataVec,
                     FilteredData.push_back(data);
                 }
             }
+
+            return FilteredData;
 }
