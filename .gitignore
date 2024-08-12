@@ -1,4 +1,4 @@
-venv/
+FinEng.env/
 .vscode/
 login.ini
 BackTestingFrameWork/python/LowFrequency
