@@ -17,7 +17,7 @@ class MarketDataApiCredentials:
                  version = "interactive_1.0.1",
                  secretKey = None,
                  apiKey = None,
-                 config_file = "/TT_BLAZE_XTS/market_data_api/data/xts_login.ini"
+                 root_dir = None,
                  ):
         
         self.url = url
@@ -28,11 +28,14 @@ class MarketDataApiCredentials:
         self.auth_token = None
         self.token = None
 
-        self.config_file_path = config_file
-        os.makedirs(config_file, exist_ok = True)
+        try:
+            self.config_file_path = root_dir
+            os.makedirs(root_dir, exist_ok = True)
 
-        self.config_write = ConfigParser()
-        self.config_read = ConfigParser()
+            self.config_write = ConfigParser()
+            self.config_read = ConfigParser()
+        except Exception as e:
+            raise BufferError("Issue In Reading .ini File in MarketDataApiCredentials")
 
 
     def host_look_up(self):
