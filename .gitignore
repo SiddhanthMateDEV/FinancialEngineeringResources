@@ -2,3 +2,4 @@ venv/
 .vscode/
 login.ini
 BackTestingFrameWork/python/LowFrequency
+.env
