@@ -3,3 +3,4 @@ venv/
 login.ini
 BackTestingFrameWork/python/LowFrequency
 .env
+.DS_Store
