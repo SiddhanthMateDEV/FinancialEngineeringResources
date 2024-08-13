@@ -404,6 +404,18 @@ I just want to extend my heartfelt thanks to everyone who has supported me on th
 - [**(Edwards, S. (1985)) NBER WORKING PAPER SERIES THE PRICING OF BONDS AND BANK LOANS IN INTERNATIONAL MARKETS: AN EMPIRICAL ANALYSIS OF DEVELOPING COUNTRIES’ FOREIGN BORROWING.**](https://www.nber.org/system/files/working_papers/w1689/w1689.pdf)
 - [**(2017). Efficient Capital Markets: A Review of Theory and Empirical Work**](https://www.google.com/search?q=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&rlz=1C5CHFA_enIN1117IN1117&oq=Efficient+Capital+Markets%3A+A+Review+of+Theory+and+Empirical+Work&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBBzU2MWowajSoAgCwAgE&sourceid=chrome&ie=UTF-8)
 
+---
+
+## References:
+
+### C++ XTS Infrastructure:
+
+- [**[1]**](https://curl.se/libcurl/c/curl_easy_setopt.html)
+- [**[2]**](https://curl.se/libcurl/c/curl_easy_perform.html)
+- [**[3]**](https://curl.se/libcurl/c/curl_slist_free_all.html)
+- [**[4]**](https://curl.se/libcurl/c/curl_easy_cleanup.html)
+
+
 ### Other Resources
 
 #### YouTube

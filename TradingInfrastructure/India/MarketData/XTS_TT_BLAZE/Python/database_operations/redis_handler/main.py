@@ -21,13 +21,13 @@ class RedisHandler:
                                         db = self.redis_db, 
                                         decode_responses = self.redis_decode_response)
         
-    def publish_to_redis(self, channel, data):
+    def PublishToRedis(self, channel, data):
         self.redis_client.publish(channel, json.dumps(data))
 
-    def schedule_redis_cleanup(self):
+    def ScheduleRedisCleanUp(self):
         Timer(self.redis_interval,self.clean_up_redis).start()
 
     def clean_up_redis(self):
         self.redis_client.flushdb()
-        self.schedule_redis_cleanup()
+        self.ScheduleRedisCleanUp()
         

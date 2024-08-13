@@ -36,7 +36,7 @@ class MarketDataApiCredentials:
 
 
 
-    def host_look_up(self):
+    def HostLookUp(self):
         HOST_LOOKUP_URL = fr"{self.url}:4000/HostLookUp"
         payload_host_lookup = {
             "accesspassword": self.access_password,
@@ -56,7 +56,7 @@ class MarketDataApiCredentials:
             print(fr"HOST LOOKUP REQUEST HAS FAILED")
 
 
-    def login_market_api(self):
+    def login(self):
         self.config_read.read(str(self.config_file_path))
         self.auth_token = self.config_read['AUTH']['unique_key'] or self.host_look_up()
         

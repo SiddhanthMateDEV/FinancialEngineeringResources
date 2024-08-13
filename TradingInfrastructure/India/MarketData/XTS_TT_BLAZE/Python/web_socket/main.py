@@ -164,52 +164,43 @@ class WebSocket(ProductConfig,
         @self.socket.on("1501-json-partial")
         def on_touchline(data):
             print("1501 touchline data: ",data)
-            self.publish_to_redis("touchline-partial", data)
+            self.PublishToRedis("touchline-partial", data)
 
         # market depth event
         @self.socket.on("1502-json-partial")
         def on_market_data(data):
             print("1502 market data: ",data)
-            self.publish_to_redis("market-depth-partial", data)
+            self.PublishToRedis("market-depth-partial", data)
         
         # candle data event
         @self.socket.on("1505-json-partial")
         def on_candle_data(data):  
             print("1505 candle data: ",data)
-            self.publish_to_redis("candle-data-partial", data)
+            self.PublishToRedis("candle-data-partial", data)
 
         # market status event
         @self.socket.on("1507-json-partial")
         def on_market_status_data(data):
             print("1507 market status data: ",data)
-            self.publish_to_redis("market-status-partial", data)
+            self.PublishToRedis("market-status-partial", data)
 
         # open interest event
         @self.socket.on("1510-json-partial")
         def on_open_interest(data):
             print("1510 open interest data: ",data)
-            self.publish_to_redis("open-interest-partial", data)
+            self.PublishToRedis("open-interest-partial", data)
         
         # ltp event
         @self.socket.on("1512-json-partial")
         def on_ltp_data(data):
             print("1512 LTP data: ",data)
-            self.publish_to_redis("ltp-partial", data)
+            self.PublishToRedis("ltp-partial", data)
 
         # instrument property change event
         @self.socket.on("1105-json-partial")
         def on_instrument_change_data(data):
             print("1105 instrument change data: ",data)
-            self.publish_to_redis("instrument-change-partial", data)
-
-
-    def schedule_redis_cleanup(self):
-        Timer(self.redis_interval,self.clean_up_redis).start()
-
-
-    def clean_up_redis(self):
-        self.redis_client.flushdb()
-        self.schedule_redis_cleanup()
+            self.PublishToRedis("instrument-change-partial", data)
 
 
     def start(self):

@@ -8,7 +8,7 @@ config_file_path = "/TT_BLAZE_XTS/market_data_api/data/xts_login.ini"
 config_write = ConfigParser()
 config_read = ConfigParser()
 
-class market_data_api_functions:
+class MarketDataFunctions:
     def __init__(self, 
                  url = "https://ttblaze.iifl.com", 
                  secretKey = None,
@@ -27,7 +27,7 @@ class market_data_api_functions:
         self.index_list_cash_market = None
         self.series_futures_options_list = None
     
-    def client_config_response(self):
+    def ClientConfigResponse(self):
         #client config
         config_read.read(str(config_file_path))
         self.token = config_read['AUTH']['token']
@@ -57,7 +57,7 @@ class market_data_api_functions:
             print("CLIENT CONFIG REQUEST FAILED")
 
     #get index list
-    def index_list_response(self, exchange_segment = None):
+    def IndexListResponse(self, exchange_segment = None):
         config_read.read(str(config_file_path))
         self.token = config_read['AUTH']['token']
         INDEX_LIST_URL = fr"{self.url}/apimarketdata/instruments/indexlist"
@@ -78,7 +78,7 @@ class market_data_api_functions:
             print("BAD INDEX LIST REQUEST")
 
     #get series list
-    def series_list(self, exchange_segment = None):
+    def SeriesList(self, exchange_segment = None):
         config_read.read(str(config_file_path))
         self.token = config_read['AUTH']['token']
         assert exchange_segment is not None,"Exchange Segment Value cannot be set to None"
@@ -100,7 +100,7 @@ class market_data_api_functions:
         else:
             print("BAD REQUEST SERIES LIST")
 
-    def options_expiry_list(self, series = None, symbol = None):
+    def OptionsExpiryList(self, series = None, symbol = None):
         config_read.read(str(config_file_path))
         self.token = config_read['AUTH']['token']
         if series and symbol is None:
@@ -124,7 +124,7 @@ class market_data_api_functions:
         else:
             print("BAD REQUEST SERIES LIST")
 
-    def master_data(self):
+    def MasterData(self):
         MASTER_DATA_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/master"
         header_master_list = {
             'Content-Type': 'application/json',
