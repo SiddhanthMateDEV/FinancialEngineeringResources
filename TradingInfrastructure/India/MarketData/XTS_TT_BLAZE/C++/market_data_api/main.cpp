@@ -25,7 +25,7 @@ MarketDataAPIFunctions::MarketDataAPIFunctions(
         std::cout<<"login.ini File Exists in the Current Working Directory"<<std::endl;
     } else {
         std::ofstream file(filename);
-
+        std::cout<<"File Created: "<<folder_path<<"/"<<filename<<std::endl;
     }
 }
 
