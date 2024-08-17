@@ -20,10 +20,12 @@ MarketDataAPIFunctions::MarketDataAPIFunctions(
                                                            authToken(authToken), 
                                                            token(token) {
     std::string filename = "login.ini";
+    std::string folder_path = std::filesystem::
     if(std::filesystem::exists(filename)){
         std::cout<<"login.ini File Exists in the Current Working Directory"<<std::endl;
     } else {
         std::ofstream file(filename);
+
     }
 }
 
