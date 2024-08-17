@@ -3,11 +3,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <curl/curl.h>
+#include <fstream>
+#include <filesystem>
+#include <stdexcept>
 
-#include "../InstrumentStructures/IndexListCashMarket.h"
-#include "../InstrumentStructures/SeriesFNOList.h"
-#include "../InstrumentStructures/ExpiryList.h"
-#include "../InstrumentStructures/MasterDataStruct.h"
 
 class MarketDataAPIFunctions {
     private:
@@ -21,11 +21,6 @@ class MarketDataAPIFunctions {
         std::string PublishFormat;
         std::string BroadcastMode;
         std::string InstrumentType;
-        std::vector<CashListStruct> CashList;
-        std::vector<fnoListStruct> SeriesFNOList;
-        std::vector<ExpiryListStruct> expiryList;
-        // std::string exchangeSegment;
-        // int xtsMessageCode;
 
         MarketDataAPIFunctions(const std::string& url,
                                const std::string& secretKey,
@@ -40,10 +35,10 @@ class MarketDataAPIFunctions {
         }
 
         void ClientConfigResponse();
-        void IndexListResponse();
-        void SeriesListResponse();
-        std::vector<ExpiryListStruct> ExpiryList();
-        std::vector<MasterDataStruct> MasterDataResponse();
+        std::tuple<int,std::vector<std::string>> IndexListResponse();
+        std::vector<std::string> SeriesListResponse();
+        std::vector<std::string> ExpiryList();
+        std::vector<std::string> MasterDataResponse();
 };
 
 

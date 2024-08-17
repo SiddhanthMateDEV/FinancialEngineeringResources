@@ -1,12 +1,17 @@
 import requests as rqs
 import json 
-from configparser import ConfigParser
-import os
+import configparser
 
-config_file_path = "/TT_BLAZE_XTS/market_data_api/data/xts_login.ini"
-# os.makedirs(config_file_path, exist_ok = True)
-config_write = ConfigParser()
-config_read = ConfigParser()
+
+config = configparser.ConfigParser()
+config_file_path = "./login.ini"
+
+
+"""
+Note: In the following code the variables `section_header` & `section_item_name` are passed to get 
+the header in the ini file and the key associated under that header.
+"""
+
 
 class MarketDataFunctions:
     def __init__(self, 
@@ -18,19 +23,21 @@ class MarketDataFunctions:
         self.secretKey = secretKey
         self.apiKey = apiKey
         self.auth_token = None
-        self.token = None
         self.exchangeSegment = None
         self.xtsMessageCode = None
         self.publishFormat = None
         self.broadCastMode = None
         self.instrumentType = None
-        self.index_list_cash_market = None
-        self.series_futures_options_list = None
     
-    def ClientConfigResponse(self):
+    def ClientConfigResponse(self,                  
+                            section_header : str, #this is the title of the section ini file
+                            section_item_name : str): #this is the name of the item in the ini file section
         #client config
-        config_read.read(str(config_file_path))
-        self.token = config_read['AUTH']['token']
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"   
+
         CLIENT_CONFIG_URL = fr"{self.url}/apimarketdata/config/clientConfig"
         header_client_config = {
             'Content-Type': 'application/json',
@@ -38,57 +45,75 @@ class MarketDataFunctions:
         }
         response_client_config = rqs.get(url = CLIENT_CONFIG_URL, 
                                          headers = header_client_config)
+        print(response_client_config)
         if response_client_config.status_code == 200:
             client_config_response_data = response_client_config.json()
             data = client_config_response_data.get('result') 
             # this might cause an error if so check the key name and change it
             self.exchangeSegment = client_config_response_data.get('exchangeSegments') 
-            config_write['exchangeSegments'] = {key: int(value) for key, value in data['exchangeSegments'].items()}
+            config['exchangeSegments'] = {key: int(value) for key, value in data['exchangeSegments'].items()}
             self.xtsMessageCode = client_config_response_data.get('xtsMessageCode') 
-            config_write['xtsMessageCode'] = {key: int(value) for key, value in data['xtsMessageCode'].items()}
+            config['xtsMessageCode'] = {key: int(value) for key, value in data['xtsMessageCode'].items()}
             self.publishFormat = client_config_response_data.get('publishFormat') 
-            config_write['publishFormat'] = {'format': ','.join(data['publishFormat'])}
+            config['publishFormat'] = {'format': ','.join(data['publishFormat'])}
             self.broadCastMode = client_config_response_data.get('broadCastMode')
-            config_write['broadCastMode'] = {'format': ','.join(data['broadCastMode'])} 
+            config['broadCastMode'] = {'format': ','.join(data['broadCastMode'])} 
             self.instrumentType = client_config_response_data.get('instrumentType') 
-            config_write['instrumentType'] = {key: str(value) for key, value in data['xtsMessageCode'].items()}
+            config['instrumentType'] = {key: str(value) for key, value in data['xtsMessageCode'].items()}
 
         else:
             print("CLIENT CONFIG REQUEST FAILED")
 
     #get index list
-    def IndexListResponse(self, exchange_segment = None):
-        config_read.read(str(config_file_path))
-        self.token = config_read['AUTH']['token']
+
+    def IndexList(self, 
+                  exchangeSegment: int,
+                  section_header : str, #this is the title of the section ini file
+                  section_item_name : str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"        
+        assert exchangeSegment is not None,"Exchange Segment Value cannot be set to None"
         INDEX_LIST_URL = fr"{self.url}/apimarketdata/instruments/indexlist"
         header_index_list = {
             'Content-Type': 'application/json',
             'authorization': str(self.token) 
         }
         payload_index_list = {
-            'exchangeSegment': int(exchange_segment)
+            'exchangeSegment': int(exchangeSegment)
         }
         response_index_list = rqs.get(url = INDEX_LIST_URL, 
                                       headers = header_index_list, 
                                       params = payload_index_list)
         if response_index_list.status_code == 200:
             index_list_data = response_index_list.json() 
-            self.index_list_cash_market = index_list_data.get('result').get('indexList')
+            index_list_cash_market = index_list_data.get('result').get('indexList')
+            return index_list_cash_market
         else:
             print("BAD INDEX LIST REQUEST")
 
+
     #get series list
-    def SeriesList(self, exchange_segment = None):
-        config_read.read(str(config_file_path))
-        self.token = config_read['AUTH']['token']
-        assert exchange_segment is not None,"Exchange Segment Value cannot be set to None"
+    def GetSeries(self, 
+                    exchangeSegment : int,
+                    section_header : str, #this is the title of the section ini file
+                    section_item_name : str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"        
+        assert exchangeSegment is not None,"Exchange Segment Value cannot be set to None"
+
         SERIES_LIST_URL = fr"{self.url}/apimarketdata/instruments/instrument/series"
         header_series_list = {
             'Content-Type': 'application/json',
             'authorization': str(self.token) 
         }
         payload_series_list = {
-            'exchangeSegment': int(exchange_segment)
+            'exchangeSegment': int(exchangeSegment)
         }
         response_series_list = rqs.get(url = SERIES_LIST_URL, 
                                        headers = header_series_list, 
@@ -96,22 +121,43 @@ class MarketDataFunctions:
 
         if response_series_list.status_code == 200:
             series_list_data = response_series_list.json()
-            self.series_futures_options_list = series_list_data.get('result')
+            series_futures_options_list = series_list_data.get('result')
+            return series_futures_options_list
         else:
             print("BAD REQUEST SERIES LIST")
 
-    def OptionsExpiryList(self, series = None, symbol = None):
-        config_read.read(str(config_file_path))
-        self.token = config_read['AUTH']['token']
-        if series and symbol is None:
-            raise ValueError("Series & Symbol cannot be set to None")
+    def GetExpiryDate(self,
+                          exchangeSegment: int,
+                          series: str, 
+                          symbol: str,
+                          section_header : str, #this is the title of the section ini file
+                          section_item_name : str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"
+
+        missing_params = []
+    
+        if series is None:
+            missing_params.append("series")
+        if symbol is None:
+            missing_params.append("symbol")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+        
         OPTIONS_EXPIRY_LIST_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/instrument/expiryDate"  
+        
         header_option_expiry_list = {
             'Content-Type': 'application/json',
             'authorization': str(self.token)
         }
+        
         payload_option_expiry_list = {
-            'exchangeSegment': 2,
+            'exchangeSegment': int(exchangeSegment),
             'series': str(series),
             'symbol': str(symbol)
         }
@@ -125,17 +171,24 @@ class MarketDataFunctions:
             print("BAD REQUEST SERIES LIST")
 
     def MasterData(self):
+        config = config.read(str(config_file_path))
+        self.token = config['AUTH']['token']
+        
         MASTER_DATA_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/master"
+        
         header_master_list = {
             'Content-Type': 'application/json',
             'authorization': str(self.token)
         }
+        
         payload_master_list = {
             'exchangeSegmentList': ["NSECM","NSECD","NSEFO"]
         }
+        
         response_master_list = rqs.post(url = MASTER_DATA_URL, 
                                         headers = header_master_list, 
                                         json = payload_master_list)
+        
         if response_master_list.status_code == 200:
             master_list_data = response_master_list.json()
             data = master_list_data['result']
@@ -153,12 +206,407 @@ class MarketDataFunctions:
                     "DisplayName", "PriceNumerator", 
                     "PriceDenominator", "DetailedDescription"
                     ]
+        
             for asset in data_asset_classes:
                 asset_values = asset.split('|')
                 master_data_dict = dict(zip(data_header,asset_values))
                 asset_master_data.append(master_data_dict)
 
-            with open("TT_BLAZE_XTS/market_data_api/data/market_data_list.json","w") as json_file:
+            with open("./market_data_list.json","w") as json_file:
                 json.dump(asset_master_data, json_file, indent = 4)
         else:
             print("MASTER DATA BAD REQUEST")
+
+
+
+
+    def Quotes(self,
+                    exchangeSegment : int,
+                    exchangeInstrumentID : int,
+                    xtsMessageCode : int, 
+                    publishFormat : str,
+                    section_header : str, #this is the title of the section ini file
+                    section_item_name : str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"
+        
+        missing_params = []
+    
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if exchangeInstrumentID is None:
+            missing_params.append("exchangeInstrumentID")
+        if xtsMessageCode is None:
+            missing_params.append("xtsMessageCode")
+        if publishFormat is None:
+            missing_params.append("publishFormat")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+
+        QUOTES_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/quotes"
+
+        headers_dict = {
+            'Content-Type': 'application/json',
+            'authorization': str(self.token)
+        }
+        payload_dict = {
+            "intstruments": [
+                {
+                    "exchangeSegment": int(exchangeSegment),
+                    "exchangeInstrumentID": int(exchangeInstrumentID)
+                }
+            ],
+            "xtsMessageCode": int(xtsMessageCode),
+            "publishFormat": str(publishFormat)
+        }
+
+        quotes_response = rqs.post(url = QUOTES_URL,
+                                   headers = headers_dict,
+                                   params = payload_dict)
+        
+        if quotes_response.status_code == 200:
+            response_json = quotes_response.json()
+            response_data_dict = response_json.get('result')
+        elif quotes_response.status_code != 200:
+            print(f"Error in Quotes Response: {quotes_response.status_code}")
+        else:
+            print("Unidentifiable error occurred")
+
+    
+
+
+
+    def Subscription(self,
+                    exchangeSegment : int,
+                    exchangeInstrumentID : int,
+                    xtsMessageCode: int,
+                    section_header: str, #this is the title of the section ini file
+                    section_item_name: str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"
+        
+        missing_params = []
+        
+    
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if exchangeInstrumentID is None:
+            missing_params.append("exchangeInstrumentID")
+        if xtsMessageCode is None:
+            missing_params.append("message_code")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+
+        SUBSCRIPTION_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/subscription"
+
+        headers_dict = {
+            'Content-Type': 'application/json',
+            'authorization': str(self.token)
+        }
+        payload_dict = {
+            "intstruments": [
+                {
+                    "exchangeSegment": int(exchangeSegment),
+                    "exchangeInstrumentID": int(exchangeInstrumentID)
+                }
+            ],
+            "xtsMessageCode": int(xtsMessageCode),
+        }
+
+        subscription_response = rqs.post(url = SUBSCRIPTION_URL,
+                                         headers = headers_dict,
+                                         params = payload_dict)
+
+        if subscription_response.status_code != 200:
+            print(fr"Error in Subscription Response {subscription_response.status_code}")
+            return response_data_dict
+        elif subscription_response.status_code != 200:
+            response_json = subscription_response.json()
+            response_data_dict = response_json.get('result')
+        else:
+            print("Unidentifiable Error Occured")
+
+    
+    def Unsubscription(self,
+                    exchangeSegment : int,
+                    exchangeInstrumentID : int,
+                    xtsMessageCode: int ,                        
+                    section_header: str, #this is the title of the section ini file
+                    section_item_name: str): #this is the name of the item in the ini file section
+        
+        config = config.read(str(config_file_path))
+
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        
+        assert self.token, "token should not be None but is None"
+        
+        missing_params = []
+        
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if exchangeInstrumentID is None:
+            missing_params.append("exchangeInstrumentID")
+        if xtsMessageCode is None:
+            missing_params.append("xtsMessageCode")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+
+
+        UNSUBSCRIPTION_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/subscription"
+
+        headers_dict = {
+            'Content-Type': 'application/json',
+            'authorization': str(self.token)
+        }
+        payload_dict = {
+            "intstruments": [
+                {
+                    "exchangeSegment": int(exchangeSegment),
+                    "exchangeInstrumentID": int(exchangeInstrumentID)
+                }
+            ],
+            "xtsMessageCode": int(xtsMessageCode),
+        }
+
+        unsubscription_response = rqs.put(url = UNSUBSCRIPTION_URL,
+                                         headers = headers_dict,
+                                         params = payload_dict)
+
+        if unsubscription_response.status_code != 200:
+            print(fr"Error in Subscription Response {unsubscription_response.status_code}")
+        else:
+            response_json = unsubscription_response.json()
+            response_data_dict = response_json.get('result')
+
+        return response_data_dict
+    
+    
+    def GetEquitySymbol(self,
+                        exchangeSegment : int,
+                        series : str,
+                        symbol : str,
+                        section_header: str,
+                        section_item_name: str):
+        
+        GET_EQUITY_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/symbol"
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        assert self.token, "token should not be None but is None"
+
+        missing_params = []
+        
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if series is None:
+            missing_params.append("series")
+        if symbol is None:
+            missing_params.append("symbol")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+        
+        headers_dict = {
+            "Content-Type": "application/json",
+            "authorization": str(self.token)
+        }
+
+        payload_dict = {
+            "exchangeSegment": int(exchangeSegment),
+            "series": str(series),
+            "symbol": str(symbol)    
+        }
+        
+        get_equity_symbol_response = rqs.get(url = GET_EQUITY_SYMBOL_URL,
+                                             params = payload_dict,
+                                             headers = headers_dict)
+
+        if get_equity_symbol_response.status_code == 200:
+            response_json = get_equity_symbol_response.json()
+            response_data_dict = response_json.get('result')
+            return response_data_dict
+        elif get_equity_symbol_response.status_code != 200:
+            print(f"Error in get_equity_symbol_response Response: {get_equity_symbol_response.status_code}")
+        else:
+            print("Unidentifiable error occurred")
+
+
+
+    def GetFutureSymbol(self,
+                        exchangeSegment : int,
+                        series : str,
+                        symbol : str,
+                        expiryDate: str,
+                        section_header: str,
+                        section_item_name: str):
+        
+        GET_FUTURE_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/futureSymbol"
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        assert self.token, "token should not be None but is None"
+
+        missing_params = []
+        
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if series is None:
+            missing_params.append("series")
+        if symbol is None:
+            missing_params.append("symbol")
+        if expiryDate is None:
+            missing_params.append("expiryDate")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+        
+        headers_dict = {
+            "Content-Type": "application/json",
+            "authorization": str(self.token)
+        }
+
+        payload_dict = {
+            "exchangeSegment": int(exchangeSegment),
+            "series": str(series),
+            "symbol": str(symbol)    
+        }
+        
+        get_future_symbol_response = rqs.get(url = GET_FUTURE_SYMBOL_URL,
+                                             params = payload_dict,
+                                             headers = headers_dict)
+
+        if get_future_symbol_response.status_code == 200:
+            response_json = get_future_symbol_response.json()
+            response_data_dict = response_json.get('result')
+            return response_data_dict
+        elif get_future_symbol_response.status_code != 200:
+            print(f"Error in get_equity_symbol_response Response: {get_future_symbol_response.status_code}")
+        else:
+            print("Unidentifiable error occurred")
+
+
+    def GetOptionSymbol(self,
+                        exchangeSegment : int,
+                        series : str,
+                        symbol : str,
+                        expiryDate: str,
+                        optionType: str,
+                        strikePrice: int,
+                        section_header: str,
+                        section_item_name: str):
+        
+        GET_OPTION_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/optionSymbol"
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        assert self.token, "token should not be None but is None"
+
+        missing_params = []
+        
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if series is None:
+            missing_params.append("series")
+        if symbol is None:
+            missing_params.append("symbol")
+        if expiryDate is None:
+            missing_params.append("expiryDate")
+        if optionType is None:
+            missing_params.append("optionType")
+        if strikePrice is None:
+            missing_params.append("strikePrice")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+        
+        headers_dict = {
+            "Content-Type": "application/json",
+            "authorization": str(self.token)
+        }
+
+        payload_dict = {
+            "exchangeSegment": int(exchangeSegment),
+            "series": str(series),
+            "symbol": str(symbol)    
+        }
+        
+        get_option_symbol_response = rqs.get(url = GET_OPTION_SYMBOL_URL,
+                                             params = payload_dict,
+                                             headers = headers_dict)
+
+        if get_option_symbol_response.status_code == 200:
+            response_json = get_option_symbol_response.json()
+            response_data_dict = response_json.get('result')
+            return response_data_dict
+        elif get_option_symbol_response.status_code != 200:
+            print(f"Error in get_option_symbol_response Response: {get_option_symbol_response.status_code}")
+        else:
+            print("Unidentifiable error occurred")
+
+    def GetOptionType(self,
+                        exchangeSegment : int,
+                        series : str,
+                        symbol : str,
+                        expiryDate: str,
+                        section_header: str,
+                        section_item_name: str):
+        
+        GET_OPTION_TYPE_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/optionType"
+        
+        config = config.read(str(config_file_path))
+        self.token = config.get(str(section_header)).get(str(section_item_name))
+        assert self.token, "token should not be None but is None"
+
+        missing_params = []
+        
+        if exchangeSegment is None:
+            missing_params.append("exchangeSegment")
+        if series is None:
+            missing_params.append("series")
+        if symbol is None:
+            missing_params.append("symbol")
+        if expiryDate is None:
+            missing_params.append("expiryDate")
+        
+        if missing_params:
+            raise ValueError(f"The following parameters cannot be None: {', '.join(missing_params)}")
+        
+        headers_dict = {
+            "Content-Type": "application/json",
+            "authorization": str(self.token)
+        }
+
+        payload_dict = {
+            "exchangeSegment": int(exchangeSegment),
+            "series": str(series),
+            "symbol": str(symbol)    
+        }
+        
+        get_option_type_response = rqs.get(url = GET_OPTION_TYPE_URL,
+                                             params = payload_dict,
+                                             headers = headers_dict)
+
+        if get_option_type_response.status_code == 200:
+            response_json = get_option_type_response.json()
+            response_data_dict = response_json.get('result')
+            return response_data_dict
+        elif get_option_type_response.status_code != 200:
+            print(f"Error in get_option_symbol_response Response: {get_option_type_response.status_code}")
+        else:
+            print("Unidentifiable error occurred")
+
+    
+
+
+

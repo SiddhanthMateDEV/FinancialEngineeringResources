@@ -9,6 +9,14 @@
 #include <iostream>
 #include <filesystem>
 #include <stdexcept>
+/* 
+Note: homebrew is used for mac since im developing on mac the json package i installed gets sent here
+
+These are the instructions for mac users, considering you have already installed homebrew: 
+brew uninstall nlohmann_json
+brew untap nlohmann/json
+brew install nlohmann-json
+*/
 #include </opt/homebrew/Cellar/jsoncpp/1.9.5/include/json/json.h>
 
 
@@ -28,8 +36,6 @@ class MarketDataCredentials {
     public:
         // this is my default constructor for my purpose i have added a dynamic one in the .cpp 
         const std::string HOST_LOOKUP_URL = "https://ttblaze.iifl.com:4000/HostLookUp";
-        const std::string LOGIN_PATH = "/apimarketdata/auth/login";
-        const std::string URL = "https://ttblaze.iifl.com";
         const std::string HOST_LOGIN_URL = "https://ttblaze.iifl.com/apimarketdata/auth/login";
 
         MarketDataCredentials(

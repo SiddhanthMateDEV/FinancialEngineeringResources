@@ -414,8 +414,10 @@ I just want to extend my heartfelt thanks to everyone who has supported me on th
 - [**[2]**](https://curl.se/libcurl/c/curl_easy_perform.html)
 - [**[3]**](https://curl.se/libcurl/c/curl_slist_free_all.html)
 - [**[4]**](https://curl.se/libcurl/c/curl_easy_cleanup.html)
-
-
+- [**[5]**](https://github.com/nlohmann/homebrew-json)
+- [**[6]**](https://www.geeksforgeeks.org/static_cast-in-cpp/)
+- [**[7]**](https://curl.se/libcurl/c/CURLOPT_WRITEFUNCTION.html)
+- [**[8]**]()
 ### Other Resources
 
 #### YouTube

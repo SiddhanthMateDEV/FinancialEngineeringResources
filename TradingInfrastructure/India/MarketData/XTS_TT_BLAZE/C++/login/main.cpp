@@ -99,7 +99,7 @@ void MarketDataCredentials::hostLookUp(){
             */
             curl_easy_setopt(curl,CURLOPT_HTTPHEADER, headers);
             curl_easy_setopt(curl,CURLOPT_POSTFIELDS, json_data_str.c_str());
-            curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION, write_callback);
+            curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION, write_callback); //[7]
             curl_easy_setopt(curl,CURLOPT_WRITEDATA, &response_buffer);
 
             /* 
@@ -124,7 +124,7 @@ void MarketDataCredentials::hostLookUp(){
 
         }
 
-        std::cerr<<response_buffer<<std::endl;
+        // std::cerr<<response_buffer<<std::endl;
 
 
         Json::CharReaderBuilder reader;
@@ -209,12 +209,9 @@ void MarketDataCredentials::loginMarketApi() {
         curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,write_callback);
         curl_easy_setopt(curl,CURLOPT_WRITEDATA,&resBuffer);
 
-
         res = curl_easy_perform(curl);
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
-
-
 
         if(res!=CURLE_OK){
             std::cout<<"An error occured while sending a post request from the loginMarketApi() in MarketDataCredentials class: \n"<<std::endl;

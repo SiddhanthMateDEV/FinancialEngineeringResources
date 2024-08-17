@@ -1,7 +1,7 @@
 from config.product_config.main import ProductConfig
 from config.route_config.main import RouteConfig
 from subscribe.main import SubscribedInstruments
-from xts_message_codes.main import XtsMessageCodes
+from config.xts_message_codes.main import XtsMessageCodes
 from login.main import MarketDataApiCredentials
 from database_operations.mongo_writer.main import MongoWriter
 from database_operations.redis_handler.main import RedisHandler
@@ -41,16 +41,20 @@ class WebSocket(ProductConfig,
                  redis_interval = 60,
                  ):
         
-        RedisHandler.__init__(redis_db = redis_db,
+        RedisHandler.__init__(
+                            redis_db = redis_db,
                             redis_port = redis_port,
                             redis_host = redis_host,
                             redis_decode_response = redis_decode_response,
-                            redis_interval = redis_interval)
+                            redis_interval = redis_interval
+                            )
         
-        MongoWriter.__init__(mongo_uri = mongo_uri,
+        MongoWriter.__init__(
+                            mongo_uri = mongo_uri,
                             db_name = db_name,
                             redis_host = redis_host,
-                            redis_port = redis_port,)
+                            redis_port = redis_port
+                            )
         
 
         if not all([root_url,token,db_name,coll_name,
@@ -72,8 +76,8 @@ class WebSocket(ProductConfig,
         When the class is initialised this will be called once to get the 
         unique_key to be used for the login request which is right after that
         """
-        self.host_look_up()
-        self.login_market_api()
+        self.HostLookUp()
+        self.login()
 
         super().__init__()
 
@@ -214,7 +218,7 @@ class WebSocket(ProductConfig,
         
         
         
-        
+
         
         
         

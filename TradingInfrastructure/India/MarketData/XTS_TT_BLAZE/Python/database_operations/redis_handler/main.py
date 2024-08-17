@@ -25,9 +25,9 @@ class RedisHandler:
         self.redis_client.publish(channel, json.dumps(data))
 
     def ScheduleRedisCleanUp(self):
-        Timer(self.redis_interval,self.clean_up_redis).start()
+        Timer(self.redis_interval,self.CleanUpRedis).start()
 
-    def clean_up_redis(self):
+    def CleanUpRedis(self):
         self.redis_client.flushdb()
         self.ScheduleRedisCleanUp()
         
