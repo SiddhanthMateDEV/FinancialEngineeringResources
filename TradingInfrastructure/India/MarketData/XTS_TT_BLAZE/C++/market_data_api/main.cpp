@@ -18,16 +18,56 @@ MarketDataAPIFunctions::MarketDataAPIFunctions(
                                                            secretKey(secretKey), 
                                                            apiKey(apiKey), 
                                                            authToken(authToken), 
-                                                           token(token) {
-    std::string filename = "login.ini";
-    std::string folder_path = std::filesystem::
+                                                           token(token) {}
+
+MarketDataAPIFunctions::MarketDataAPIFunctions(const std::string& url,
+                                            const std::string& secretKey,
+                                            const std::string& apiKey,
+                                            const std::string& authToken,
+                                            const std::string& token){
+    std::string filename = "./login.ini";
+    std::string folder_path(std::filesystem::current_path());
     if(std::filesystem::exists(filename)){
         std::cout<<"login.ini File Exists in the Current Working Directory"<<std::endl;
+        std::ifstream inFile(filename);
+
+        if(inFile.is_open()){
+            std::string line;
+            std::string currentSection;
+            std::map<std::string,std::string> config;
+
+            while(std::getline(inFile,line)){
+                if(line.empty()) continue;
+                std::istringstream istream(line);
+                std::string key, value;
+
+                if(std::getline(istream,key,"=") && std::getline(istream,value)){
+                    key.erase(0,key.find_first_not_of(" \t"));
+                    key.erase(key.find_last_not_of("\t")+1);
+
+                    value.erase(0,key.find_first_not_of(" \t"));
+                    value.erase(key.find_last_not_of("\t")+1);
+
+                    config[key] = value;
+                }
+            }
+        }
     } else {
+        this->url = url;
+        this->apiKey = apiKey;
+        this->authToken = authToken;
+        this->token = token;
+        this->secretKey = secretKey;
+
         std::ofstream file(filename);
-        std::cout<<"File Created: "<<folder_path<<"/"<<filename<<std::endl;
+        file<<"AUTH_TOKEN = "<<authToken;
+        file<<"TOKEN = " << token;
+        file<<"API_KEY = " << apiKey;
+        file<<"SECRET_KEY = "<< secretKey;
+        file.close();
     }
-}
+
+},
 
 
 std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const int& exchangeSegment, const std::string& section_header, const std::string& section_item_name) {
@@ -41,7 +81,7 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
     CURLcode res;
     std::string response_buffer;
 
-    std::string authorisation = "authorization: " + token;
+    std::string authorisation = "authorization: " + this->token;
     struct curl_slist* headers = NULL;
     headers = curl_slist_append(headers, "Content-Type: application/json");
     headers = curl_slist_append(headers, authorisation.c_str());
@@ -102,6 +142,6 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
 }
 
 std::vector<std::string> SeriesListResponse(const int& exchangeSegment, const std::string& segment_header, const std::string& segment_item_name){
-
+    CURL* curl;
 }
 

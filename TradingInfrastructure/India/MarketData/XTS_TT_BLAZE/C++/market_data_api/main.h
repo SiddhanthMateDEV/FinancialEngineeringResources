@@ -22,17 +22,7 @@ class MarketDataAPIFunctions {
         std::string BroadcastMode;
         std::string InstrumentType;
 
-        MarketDataAPIFunctions(const std::string& url,
-                               const std::string& secretKey,
-                               const std::string& apiKey,
-                               const std::string& authToken,
-                               const std::string& token){
-                                this->url = url;
-                                this->secretKey = secretKey;
-                                this->apiKey = apiKey;
-                                this->authToken = authToken;
-                                this->token = token;
-        }
+        MarketDataAPIFunctions() {}
 
         void ClientConfigResponse();
         std::tuple<int,std::vector<std::string>> IndexListResponse();
