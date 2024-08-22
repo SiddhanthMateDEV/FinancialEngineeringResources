@@ -260,12 +260,12 @@ TradingInfrastructure/
         └── XTS_TT_BLAZE/
             └── C++/
                 ├── config/
-                ├── data/
-                ├── database_operations/
-                ├── login/
-                ├── market_data_api/
+                ├── accessories/
+                ├── testCPP/
+                ├── Auth/
+                ├── Instruments/
                 ├── subscribe/
-                ├── web_socket/
+                ├── web_soc/
                 └── xts_message_codes/
 ```
 #### The Documentation:
@@ -274,10 +274,10 @@ TradingInfrastructure/
 #### `config`: Contains the two folders one for the config of products distributed by xts and the other is routes, which contains the paths for getting different api related backend functionality.
   - [**Config Routes**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/config)
 
-#### `login`: Manages host look up and login to obtain authetication token and the token for each session.
+#### `Auth`: Manages host look up and login to obtain authetication token and the token for each session.
   - [**Login Code**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/login)
 
-#### `market_data_api`: Provides example usage of the Market Data functionalities.
+#### `Instruments`: Provides example usage of the Market Data functionalities.
   - [**Market Data API Functions**](https://github.com/SiddhanthMateDEV/FinancialEngineeringResources/tree/main/TradingInfrastructure/India/MarketData/XTS_TT_BLAZE/C++/market_data_api)
 
 #### `subscribe`: This contains a list of dictionaries of the exchange segment and instrument of id for whose id data will be subscribed.
