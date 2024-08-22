@@ -44,7 +44,7 @@ class MarketDataFunctions:
             'authorization': str(self.token)
         }
         response_client_config = rqs.get(url = CLIENT_CONFIG_URL, 
-                                         headers = header_client_config)
+                                          headers = header_client_config)
         print(response_client_config)
         if response_client_config.status_code == 200:
             client_config_response_data = response_client_config.json()

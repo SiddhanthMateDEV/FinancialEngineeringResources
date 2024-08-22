@@ -1,12 +1,16 @@
 // Please install curl libraries before using
 // also note its best to run the function using this: g++ main.cpp -o main -lcurl
 
-#include "main.h"
+#include "auth.h"
+#include <filesystem>
 
 
-std::__fs::filesystem::path current_working_directory = std::__fs::filesystem::current_path();
-std::__fs::filesystem::path config_file_path = current_working_directory / "login.ini";
-const std::string config_file_path_str = config_file_path.string();
+// std::__fs::filesystem::path current_working_directory = std::__fs::filesystem::current_path();
+// std::__fs::filesystem::path parent_directory = current_working_directory.parent_path();
+// std::__fs::filesystem::path config_file_path = parent_directory/"login.ini";
+// const std::string this->config_file_path = config_file_path.string();
+
+// const std::string this->config_file_path = "./login.ini";
 
 // append works with C++98,11,14
 size_t write_callback(void* contents, size_t size, size_t nmemb, std::string* userp){
@@ -14,21 +18,19 @@ size_t write_callback(void* contents, size_t size, size_t nmemb, std::string* us
     return size*nmemb;
 }
 
-
 // adding a dynamic constructor 
 MarketDataCredentials::MarketDataCredentials(
-    const std::string& url,
     const std::string& access_password,
     const std::string& version,
-    const std::string& secret_key,
-    const std::string& api_key) : url(url), access_password(access_password), version(version), secret_key(secret_key), api_key(api_key) {
-    // creating the directory for the .ini file here 
-    std::__fs::filesystem::create_directories(std::__fs::filesystem::path(config_file_path_str).parent_path());
-}
+    const std::string& config_file_path
+    ) : access_password(access_password), 
+        version(version), 
+        config_file_path(config_file_path) 
+        {}
 
 void MarketDataCredentials::writeConfig(const std::string& key, const std::string& value){
     // creating a config file to be written with the response data
-    std::ofstream config_file(config_file_path_str,std::ios::app); //using std::ios::app to write items to the end of the file
+    std::ofstream config_file(this->config_file_path,std::ios::app); //using std::ios::app to write items to the end of the file
     if(!config_file.is_open()){
         throw std::runtime_error("Unable to open config file for writing");
     }
@@ -39,9 +41,11 @@ void MarketDataCredentials::writeConfig(const std::string& key, const std::strin
 }
 
 std::string MarketDataCredentials::readConfig(const std::string& key){
-    std::ifstream config_file(config_file_path_str);
+    std::cout<<"The config file is being read here: "<<this->config_file_path<<std::endl;
+    std::ifstream config_file(this->config_file_path);
+
     if(!config_file.is_open()){
-            throw std::runtime_error("Unable to open config file for reading");
+        throw std::runtime_error("Unable to open config file for reading");
     }
 
     std::string line;
@@ -50,24 +54,24 @@ std::string MarketDataCredentials::readConfig(const std::string& key){
         if(line.rfind(key,0) == 0){
             config_file.close();
             return line.substr(key.size()+1);
-        } else {
-            config_file.close();
-            throw std::runtime_error("Unable to find the key");
         }
     }
-
+    config_file.close();
+    std::cout<<"Error coming from /login/main.cpp line 58"<<std::endl;
+    throw std::runtime_error("Unable to find the key");
 }
 
-void MarketDataCredentials::hostLookUp(){
+void MarketDataCredentials::HostLookUp(){
     
     std::string json_data_str;
-    CURL* curl;
+    CURL* curl = NULL;
+    std::cout<<"The config file is being read here: "<<this->config_file_path<<std::endl;
     
-    if(!curl){
-        std::cerr<<"Error intialising curl in hostLookUp() in MarketDataCredentials class"<<std::endl;
-        return;
+    if (!std::__fs::filesystem::exists(this->config_file_path)) {
+        throw std::runtime_error("Config file does not exist | hostLookUp error");
     }
 
+    
     CURLcode res;
     std::string response_buffer;
 
@@ -142,29 +146,33 @@ void MarketDataCredentials::hostLookUp(){
             throw std::runtime_error("Unique key returned from the json response is empty");
         } else {
             std::string auth_token(unique_key);
-            writeConfig("AUTH_TOKEN",auth_token);
+            writeConfig("TOKEN",auth_token);
         }
 
     }
 }
 
 
-void MarketDataCredentials::loginMarketApi() {
-    
+void MarketDataCredentials::Login() {
     std::string authToken;
-    std::string payloadString;    
+    std::string payloadString;   
+
+    if (!std::__fs::filesystem::exists(this->config_file_path)) {
+        throw std::runtime_error("Config file does not exist | Login error");
+    }
+ 
     try {
-        authToken = readConfig("AUTH_TOKEN");
+        authToken = readConfig("TOKEN");
     } catch (std::runtime_error& e){
         throw std::runtime_error("Error occured while getting authToken from readConfig()");
     }
 
     if (authToken.empty()){
         hostLookUp();
-        authToken = readConfig("AUTH_TOKEN");
+        authToken = readConfig("TOKEN");
     }
 
-    CURL* curl;
+    CURL* curl = NULL;
     CURLcode res;
     std::string resBuffer;
 
@@ -187,7 +195,7 @@ void MarketDataCredentials::loginMarketApi() {
         payloadString = Json::writeString(writer, payload);
         std::cout<<"Payload String: "<<payloadString<<std::endl;
     } catch (std::runtime_error& e) {
-        throw std::runtime_error("Error arising in creation of payload for loginMarketApi()");
+        throw std::runtime_error("Error arising in creation of payload for Login()");
     }
 
 
@@ -202,7 +210,7 @@ void MarketDataCredentials::loginMarketApi() {
             
             std::cout<<"Header String: "<<headers<<std::endl;
         } catch (std::runtime_error& e) {
-            throw std::runtime_error("Error arising in creation of headers for loginMarketApi()");
+            throw std::runtime_error("Error arising in creation of headers for Login()");
         }
         curl_easy_setopt(curl,CURLOPT_HTTPHEADER,headers);
         curl_easy_setopt(curl,CURLOPT_POSTFIELDS,payloadString.c_str());
@@ -214,7 +222,7 @@ void MarketDataCredentials::loginMarketApi() {
         curl_easy_cleanup(curl);
 
         if(res!=CURLE_OK){
-            std::cout<<"An error occured while sending a post request from the loginMarketApi() in MarketDataCredentials class: \n"<<std::endl;
+            std::cout<<"An error occured while sending a post request from the Login() in MarketDataCredentials class: \n"<<std::endl;
             std::cerr<<curl_easy_strerror(res)<<std::endl;        
         }
 
@@ -226,7 +234,7 @@ void MarketDataCredentials::loginMarketApi() {
         
         std::istringstream stream(resBuffer);
         if(!Json::parseFromStream(response_reader,stream,&response_data,&errors)){
-            throw std::runtime_error("Error In Parsing the Response Data loginMarketApi()");
+            throw std::runtime_error("Error In Parsing the Response Data Login()");
         }
 
         std::string login_token = response_data["result"]["token"].asString();
@@ -234,8 +242,102 @@ void MarketDataCredentials::loginMarketApi() {
         if(login_token.empty()){
             throw std::runtime_error("Error: Login Token String is Empty");
         } else {
-            writeConfig("LOGIN_TOKEN",login_token);
+            writeConfig("AUTH_TOKEN",login_token);
             std::cout<<"Login Token: "<<login_token<<std::endl;//comment this out, this is for testing
+        }
+    }
+}
+
+
+void MarketDataCredentials::Logout() {
+    std::string authToken;
+    std::string payloadString;   
+
+    if (!std::__fs::filesystem::exists(this->config_file_path)) {
+        throw std::runtime_error("Config file does not exist | Logout error");
+    }
+ 
+    try {
+        authToken = readConfig("TOKEN");
+    } catch (std::runtime_error& e){
+        throw std::runtime_error("Error occured while getting authToken from readConfig()");
+    }
+
+    if (authToken.empty()){
+        hostLookUp();
+        authToken = readConfig("TOKEN");
+    }
+
+    CURL* curl = NULL;
+    CURLcode res;
+    std::string resBuffer;
+
+    curl = curl_easy_init();
+    struct curl_slist *headers = NULL; //declare this outside try and if blocks
+
+    std::string authHeader = "authorization: " + authToken;
+    std::cout<<"AUTH_HEADER: "<<authHeader<<'\n'<<std::endl;
+
+
+    // try {
+    //     Json::Value payload;
+    //     const std::string source = "WebAPI";
+
+    //     payload["source"] = source;
+    //     payload["appKey"] = this->api_key;
+    //     payload["secretKey"] = this->secret_key;
+        
+    //     Json::StreamWriterBuilder writer;
+    //     payloadString = Json::writeString(writer, payload);
+    //     std::cout<<"Payload String: "<<payloadString<<std::endl;
+    // } catch (std::runtime_error& e) {
+    //     throw std::runtime_error("Error arising in creation of payload for Logout()");
+    // }
+
+
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, HOST_LOGIN_URL.c_str());//have to use c_str() for libcurl which is c specific
+        curl_easy_setopt(curl, CURLOPT_POST, 1L); //adding this post functionality
+
+        try {
+            // just an explanation here since i got confused curl_slist_append() returns the head of the list each time
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            headers = curl_slist_append(headers, authHeader.c_str()); //since its a c lib you need to convert the string
+            
+            std::cout<<"Header String: "<<headers<<std::endl;
+        } catch (std::runtime_error& e) {
+            throw std::runtime_error("Error arising in creation of headers for Logout()");
+        }
+        curl_easy_setopt(curl,CURLOPT_HTTPHEADER,headers);
+        curl_easy_setopt(curl,CURLOPT_CUSTOMREQUEST,"DELETE");
+
+
+        res = curl_easy_perform(curl);
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+
+        if(res!=CURLE_OK){
+            std::cout<<"An error occured while sending a post request from the Logout() in MarketDataCredentials class: \n"<<std::endl;
+            std::cerr<<curl_easy_strerror(res)<<std::endl;        
+        }
+
+        Json::CharReaderBuilder response_reader;
+        Json::Value response_data;
+        Json::String errors;
+
+        std::cout<<"RESPONSE_BUFFER: "<<resBuffer<<'\n'<<std::endl;
+        
+        std::istringstream stream(resBuffer);
+        if(!Json::parseFromStream(response_reader,stream,&response_data,&errors)){
+            throw std::runtime_error("Error In Parsing the Response Data Login()");
+        }
+
+        std::string login_token = response_data[0]["type"]["success"].asString();
+
+        if(login_token.empty()){
+            throw std::runtime_error("Error: Logout Token String is Empty");
+        } else {
+            std::cout<<"User Successfully Logged Out"<<std::endl;
         }
     }
 }

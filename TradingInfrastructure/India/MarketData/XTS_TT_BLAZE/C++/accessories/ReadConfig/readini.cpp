@@ -1,4 +1,4 @@
-#include "main.h"
+#include "readini.h"
 
 void ReadIni::writeConfig(const std::string& key, 
                           const std::string& value,
@@ -6,6 +6,7 @@ void ReadIni::writeConfig(const std::string& key,
     // creating a config file to be written with the response data
     std::ofstream config_file(ConfigFilePathString,std::ios::app); //using std::ios::app to write items to the end of the file
     if(!config_file.is_open()){
+        std::cout<<"Error coming from /ReadConfig/readini.cpp line 9"<<std::endl;
         throw std::runtime_error("Unable to open config file for writing");
     }
 
@@ -18,7 +19,8 @@ std::string ReadIni::readConfig(const std::string& key,
                                 const std::string& ConfigFilePathString){
     std::ifstream config_file(ConfigFilePathString);
     if(!config_file.is_open()){
-            throw std::runtime_error("Unable to open config file for reading");
+        std::cout<<"Error coming from /ReadConfig/readini.cpp line 22"<<std::endl;
+        throw std::runtime_error("Unable to open config file for reading");
     }
 
     std::string line;
@@ -27,10 +29,8 @@ std::string ReadIni::readConfig(const std::string& key,
         if(line.rfind(key,0) == 0){
             config_file.close();
             return line.substr(key.size()+1);
-        } else {
-            config_file.close();
-            throw std::runtime_error("Unable to find the key");
-        }
+        } 
     }
-
+    config_file.close();
+    throw std::runtime_error("Unable to find the key");
 }

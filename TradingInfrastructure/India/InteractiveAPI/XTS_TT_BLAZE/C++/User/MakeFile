@@ -1,0 +1,25 @@
+
+# here i am just assigning the variables to be read later
+CXX = g++ #compiler name
+CXXFLAGS = -std=c++11 -Wall
+TARGET_EXE = output
+OBJS = test.cpp main.cpp ../apiUrls/urls.cpp
+
+
+all: output
+
+output: $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(TARGET_EXE)
+
+# test.o: test.cpp 
+# 	$(CXX) $(CXXFLAGS) -c test.cpp 
+
+# main.o: main.cpp main.h
+# 	$(CXX) $(CXXFLAGS) -c main.cpp 
+
+# apiUrls/main.o: ../apiUrls/urls.cpp ../apiUrls/urls.h
+# 	$(CXX) $(CXXFLAGS) -c ../apiUrls/urls.cpp 
+
+
+clean:
+	rm *.o output
