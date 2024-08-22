@@ -16,7 +16,7 @@ class MarketDataAPIFunctions {
         MarketDataAPIFunctions() {};
 
         void ClientConfigResponse();
-        std::tuple<int,std::map<std::string,int>,std::map<std::string,std::map<std::string,int>>> Quotes();
+        void Quotes();
         std::tuple<int,std::vector<std::string>> IndexListResponse();
         // std::vector<std::string> SeriesListResponse();
         // std::vector<std::string> ExpiryList();

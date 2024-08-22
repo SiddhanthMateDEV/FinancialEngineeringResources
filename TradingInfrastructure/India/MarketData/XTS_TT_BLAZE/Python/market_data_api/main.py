@@ -13,7 +13,7 @@ the header in the ini file and the key associated under that header.
 """
 
 
-class MarketDataFunctions:
+class MarketDataAPIFunctions:
     def __init__(self, 
                  url = "https://ttblaze.iifl.com", 
                  secretKey = None,
@@ -218,8 +218,6 @@ class MarketDataFunctions:
             print("MASTER DATA BAD REQUEST")
 
 
-
-
     def Quotes(self,
                     exchangeSegment : int,
                     exchangeInstrumentID : int,
@@ -271,13 +269,44 @@ class MarketDataFunctions:
         
         if quotes_response.status_code == 200:
             response_json = quotes_response.json()
-            response_data_dict = response_json.get('result')
+            result = response_json.get('result')
+            list_quotes_str = result["listQuotes"]
+
+            list_quotes = json.loads(list_quotes_str)
+
+            message_code = list_quotes["MessageCode"]
+            exchange_segment = list_quotes["ExchangeSegment"]
+            exchange_instrument_id = list_quotes["ExchangeInstrumentID"]
+
+            bids = list_quotes["Bids"]
+            for bid in bids:
+                size = bid["Size"]
+                price = bid["Price"]
+                total_orders = bid["TotalOrders"]
+                buy_back_market_maker = bid["BuyBackMarketMaker"]
+
+                print(f"Bid - Size: {size}, Price: {price}, TotalOrders: {total_orders}, BuyBackMarketMaker: {buy_back_market_maker}")
+
+            asks = list_quotes["Asks"]
+            for ask in asks:
+                size = ask["Size"]
+                price = ask["Price"]
+                total_orders = ask["TotalOrders"]
+                buy_back_market_maker = ask["BuyBackMarketMaker"]
+
+                print(f"Ask - Size: {size}, Price: {price}, TotalOrders: {total_orders}, BuyBackMarketMaker: {buy_back_market_maker}")
+
+            touchline = list_quotes["Touchline"]
+            last_traded_price = touchline["LastTradedPrice"]
+            last_traded_quantity = touchline["LastTradedQunatity"]
+
+            print(f"Last Traded Price: {last_traded_price}, Last Traded Quantity: {last_traded_quantity}")
+
+
         elif quotes_response.status_code != 200:
             print(f"Error in Quotes Response: {quotes_response.status_code}")
         else:
             print("Unidentifiable error occurred")
-
-    
 
 
 
