@@ -12,7 +12,6 @@ Note: In the following code the variables `section_header` & `section_item_name`
 the header in the ini file and the key associated under that header.
 """
 
-
 class MarketDataAPIFunctions:
     def __init__(self, 
                  url = "https://ttblaze.iifl.com", 
