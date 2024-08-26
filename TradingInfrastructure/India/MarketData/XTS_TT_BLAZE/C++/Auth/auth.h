@@ -25,6 +25,7 @@ brew install nlohmann-json
 
 
 
+
 class MarketDataCredentials {
     private:
         std::string access_password;

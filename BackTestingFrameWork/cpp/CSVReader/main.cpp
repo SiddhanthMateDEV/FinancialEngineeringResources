@@ -64,7 +64,7 @@ std::vector<StockData> CSVReader::EquityFileReader() {
             std::cerr<<"Value out of range: "<<e.what()<<std::endl;
         }
 
-        stock_data.push_back(tick_info);
+        stock_data.emplace_back(tick_info);
     }
     file.close();
     return stock_data;

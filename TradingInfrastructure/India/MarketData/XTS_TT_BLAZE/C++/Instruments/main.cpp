@@ -7,6 +7,18 @@ size_t WriteCallBack(void* contents,size_t size,size_t nmembs, std::string* resp
     return totalSize;
 }
 
+std::string getCurrentTime(){
+    std::time_t t = std::time(nullptr);
+    std::tm timeObj = *std::localtime(&t);
+    std::ostringstream oss;
+    oss<< std::put_time(&timeObj,"%Y-%m%-d");
+    return oss.str();
+}
+
+void logEvent(const std::string& message, std::string& ){
+    std::string log_filename = "eventsLogger.log";
+    std::ofstream log_file("events");
+}
 
 struct Bid {
     int Size;
@@ -22,67 +34,6 @@ struct Ask {
     int BuyBackMarketMaker;
 };
 
-
-
-// MarketDataAPIFunctions::MarketDataAPIFunctions(
-//                                const std::string& url,
-//                                const std::string& secretKey,
-//                                const std::string& apiKey,
-//                                const std::string& authToken,
-//                                const std::string& token) : url(url), 
-//                                                            secretKey(secretKey), 
-//                                                            apiKey(apiKey), 
-//                                                            authToken(authToken), 
-//                                                            token(token) {}
-
-// MarketDataAPIFunctions::MarketDataAPIFunctions(const std::string& url,
-//                                             const std::string& secretKey,
-//                                             const std::string& apiKey,
-//                                             const std::string& authToken,
-//                                             const std::string& token){
-//     std::string filename = "./login.ini";
-//     std::string folder_path(std::filesystem::current_path());
-//     if(std::filesystem::exists(filename)){
-//         std::cout<<"login.ini File Exists in the Current Working Directory"<<std::endl;
-//         std::ifstream inFile(filename);
-
-//         if(inFile.is_open()){
-//             std::string line;
-//             std::string currentSection;
-//             std::map<std::string,std::string> config;
-
-//             while(std::getline(inFile,line)){138451000
-//                 if(line.empty()) continue;
-//                 std::istringstream istream(line);
-//                 std::string key, value;
-
-//                 if(std::getline(istream,key,"=") && std::getline(istream,value)){
-//                     key.erase(0,key.find_first_not_of(" \t"));
-//                     key.erase(key.find_last_not_of("\t")+1);
-
-//                     value.erase(0,key.find_first_not_of(" \t"));
-//                     value.erase(key.find_last_not_of("\t")+1);
-
-//                     config[key] = value;
-//                 }
-//             }
-//         }
-//     } else {
-//         this->url = url;
-//         this->apiKey = apiKey;
-//         this->authToken = authToken;
-//         this->token = token;
-//         this->secretKey = secretKey;
-
-//         std::ofstream file(filename);
-//         file<<"AUTH_TOKEN = "<<authToken;
-//         file<<"TOKEN = " << token;
-//         file<<"API_KEY = " << apiKey;
-//         file<<"SECRET_KEY = "<< secretKey;
-//         file.close();
-//     }
-
-// }
 
 MarketDataAPIFunctions::MarketDataAPIFunctions() {};
 
@@ -101,7 +52,7 @@ Below is the format for Quotes function json payload:
 }
 */
 
-void MarketDataAPIFunctions::Quotes(const std::string& token,
+std::tuple<std::vector<Bid>,std::vector<Ask>> MarketDataAPIFunctions::Quotes(const std::string& token,
                                const int& exchangeSegment,
                                const int& exchangeInstrumentID,
                                const int& xtsMessageCode,
@@ -247,10 +198,18 @@ void MarketDataAPIFunctions::Quotes(const std::string& token,
                 ask["TotalOrders"].asInt(), 
                 ask["BuyBackMarketMaker"].asInt()});
         }
+
+        if(bidsVector.empty() || asksVector.empty()){
+            std::cerr<<"The Bids Or Asks Vector Is Empty"<<std::endl;
+        }
         
+        auto bidAndAsks = std::make_tuple(bidsVector,asksVector);
+
+        return bidAndAsks;  
     }
 
 }
+
 
 
 std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const int& exchangeSegment, 
@@ -335,7 +294,51 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
     }
 }
 
-// std::vector<std::string> SeriesListResponse(const int& exchangeSegment, const std::string& segment_header, const std::string& segment_item_name){
-//     CURL* curl;
-// }
+
+void MarketDataAPIFunctions::Subscribe(const int& exchangeSegment,
+                                        const int& exchangeInstrumentID,
+                                        const int& xtsMessageCode,
+                                        const int& token){
+
+    CURL* curl = nullptr;
+    std::string url = "https://ttblaze.iifl.com/apimarketdata/instruments/subscription";
+    std::string response_buffer;
+    std::string authorization_header = "authorization" + token;
+    struct curl_slist* header = nullptr;
+
+
+    Json::Value instruments_json, payload_json;
+    std::string json_payload_str;
+    payload_json["instruments"] = Json::arrayValue;
+
+    curl = curl_easy_init();
+
+    if(!curl){
+        std::cerr<<"Error In Initialising curl MarketDataAPIFunctions::Subscribe()"<<std::endl;
+    }
+
+    if(curl){
+        headers = curl_easy_append(headers, "Content-Type: application/json");
+        headers = curl_easy_append(headers, authorization_header.c_str());
+        
+        instruments_json["exchangeSegment"] = exchangeSegment;
+        instruments_json["exchangeInstrumentID"] = exchangeInstrumentID;
+
+        payload_json["instruments"].append(instruments_json);
+        payload_json["xtsMessageCode"] = xtsMessageCode;
+
+        json_payload_str = Json::writeString(writer, payload_json);
+
+        curl_easy_setopt(curl,CURLOPT_URL,url.c_str());
+        curl_easy_setopt(curl,CURLOPT_HTTPHEADER,headers);
+        curl_easy_setopt(curl,CURLOPT_POSTFIELDS,json_payload_str.c_str());
+        curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,WriteCallBack);
+        curl_easy_setopt(curl,CURLOPT_WRITEDATA,&response_buffer);
+
+        std::cout<<"Peforming A Curl Subscribe()"<<std::endl;
+
+    }
+
+
+}
 
