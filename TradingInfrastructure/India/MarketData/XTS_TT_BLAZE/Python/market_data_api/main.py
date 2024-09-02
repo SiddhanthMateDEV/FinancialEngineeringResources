@@ -3,8 +3,7 @@ import json
 import configparser
 
 
-config = configparser.ConfigParser()
-config_file_path = "./login.ini"
+
 
 
 """
@@ -16,8 +15,7 @@ class MarketDataAPIFunctions:
     def __init__(self, 
                  url = "https://ttblaze.iifl.com", 
                  secretKey = None,
-                 apiKey = None
-                 ):
+                 apiKey = None):        
         self.url = url
         self.secretKey = secretKey
         self.apiKey = apiKey
@@ -27,13 +25,15 @@ class MarketDataAPIFunctions:
         self.publishFormat = None
         self.broadCastMode = None
         self.instrumentType = None
-    
+        self.config = configparser.ConfigParser()
+        self.config_file_path = "./login.ini"
+
     def ClientConfigResponse(self,                  
                             section_header : str, #this is the title of the section ini file
                             section_item_name : str): #this is the name of the item in the ini file section
-        #client config
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        #clientself.config
+        self.config.read(self.config_file_path)
+        self.token = self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"   
 
@@ -50,18 +50,18 @@ class MarketDataAPIFunctions:
             data = client_config_response_data.get('result') 
             # this might cause an error if so check the key name and change it
             self.exchangeSegment = client_config_response_data.get('exchangeSegments') 
-            config['exchangeSegments'] = {key: int(value) for key, value in data['exchangeSegments'].items()}
+            self.config['exchangeSegments'] = {key: int(value) for key, value in data['exchangeSegments'].items()}
             self.xtsMessageCode = client_config_response_data.get('xtsMessageCode') 
-            config['xtsMessageCode'] = {key: int(value) for key, value in data['xtsMessageCode'].items()}
+            self.config['xtsMessageCode'] = {key: int(value) for key, value in data['xtsMessageCode'].items()}
             self.publishFormat = client_config_response_data.get('publishFormat') 
-            config['publishFormat'] = {'format': ','.join(data['publishFormat'])}
+            self.config['publishFormat'] = {'format': ','.join(data['publishFormat'])}
             self.broadCastMode = client_config_response_data.get('broadCastMode')
-            config['broadCastMode'] = {'format': ','.join(data['broadCastMode'])} 
+            self.config['broadCastMode'] = {'format': ','.join(data['broadCastMode'])} 
             self.instrumentType = client_config_response_data.get('instrumentType') 
-            config['instrumentType'] = {key: str(value) for key, value in data['xtsMessageCode'].items()}
+            self.config['instrumentType'] = {key: str(value) for key, value in data['xtsMessageCode'].items()}
 
         else:
-            print("CLIENT CONFIG REQUEST FAILED")
+            print("CLIENTself.config REQUEST FAILED")
 
     #get index list
 
@@ -70,8 +70,8 @@ class MarketDataAPIFunctions:
                   section_header : str, #this is the title of the section ini file
                   section_item_name : str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"        
         assert exchangeSegment is not None,"Exchange Segment Value cannot be set to None"
@@ -100,8 +100,8 @@ class MarketDataAPIFunctions:
                     section_header : str, #this is the title of the section ini file
                     section_item_name : str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"        
         assert exchangeSegment is not None,"Exchange Segment Value cannot be set to None"
@@ -132,9 +132,9 @@ class MarketDataAPIFunctions:
                           section_header : str, #this is the title of the section ini file
                           section_item_name : str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
+        self.config.read(str(self.config_file_path))
 
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"
 
@@ -170,8 +170,8 @@ class MarketDataAPIFunctions:
             print("BAD REQUEST SERIES LIST")
 
     def MasterData(self):
-        config = config.read(str(config_file_path))
-        self.token = config['AUTH']['token']
+        self.config.read(str(self.config_file_path))
+        self.token = self.config['AUTH']['token']
         
         MASTER_DATA_URL = "https://ttblaze.iifl.com/apimarketdata/instruments/master"
         
@@ -225,9 +225,9 @@ class MarketDataAPIFunctions:
                     section_header : str, #this is the title of the section ini file
                     section_item_name : str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
+        self.config.read(str(self.config_file_path))
 
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"
         
@@ -316,9 +316,9 @@ class MarketDataAPIFunctions:
                     section_header: str, #this is the title of the section ini file
                     section_item_name: str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
+        self.config.read(str(self.config_file_path))
 
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"
         
@@ -372,9 +372,9 @@ class MarketDataAPIFunctions:
                     section_header: str, #this is the title of the section ini file
                     section_item_name: str): #this is the name of the item in the ini file section
         
-        config = config.read(str(config_file_path))
+        self.config.read(str(self.config_file_path))
 
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.token =self.config[section_header][section_item_name]
         
         assert self.token, "token should not be None but is None"
         
@@ -429,8 +429,8 @@ class MarketDataAPIFunctions:
         
         GET_EQUITY_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/symbol"
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token = self.config[section_header][section_item_name]
         assert self.token, "token should not be None but is None"
 
         missing_params = []
@@ -481,8 +481,8 @@ class MarketDataAPIFunctions:
         
         GET_FUTURE_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/futureSymbol"
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token =self.config[section_header][section_item_name]
         assert self.token, "token should not be None but is None"
 
         missing_params = []
@@ -536,8 +536,8 @@ class MarketDataAPIFunctions:
         
         GET_OPTION_SYMBOL_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/optionSymbol"
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token = self.config[section_header][section_item_name]
         assert self.token, "token should not be None but is None"
 
         missing_params = []
@@ -592,8 +592,8 @@ class MarketDataAPIFunctions:
         
         GET_OPTION_TYPE_URL = fr"https://ttblaze.iifl.com/apimarketdata/instruments/optionType"
         
-        config = config.read(str(config_file_path))
-        self.token = config.get(str(section_header)).get(str(section_item_name))
+        self.config.read(str(self.config_file_path))
+        self.token =self.config[section_header][section_item_name]
         assert self.token, "token should not be None but is None"
 
         missing_params = []

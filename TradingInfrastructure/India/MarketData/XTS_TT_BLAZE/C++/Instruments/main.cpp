@@ -15,9 +15,38 @@ std::string getCurrentTime(){
     return oss.str();
 }
 
-void logEvent(const std::string& message, std::string& ){
-    std::string log_filename = "eventsLogger.log";
-    std::ofstream log_file("events");
+std::string getCurrentDatetime(){
+    std::time_t t = std::time(nullptr);
+    std::tm timeObj = *std::localtime(&t);
+    std::ostringstream oss;
+    oss<< std::put_time(&timeObj, "%Y-%m%-d %H:%M:%S");
+    return oss.str();
+    
+}
+
+void logEvent(const std::string& message, const int& event){
+    std::string current_date = getCurrentTime();
+    std::string current_datetime = getCurrentDatetime();
+    std::string log_filename = "eventsLogger_" + current_time + ".log";
+    std::ofstream log_file(log_filename, std::ios_base::app);
+
+    if(!log_file){
+        std::cerr<<"Error Opening Log File."<<std::endl;
+    }
+
+    if(log_file.is_open()){
+        switch (event){
+            case 1:
+                log_file<<current_datetime<< " | "<<"Event: "<<message<<std::endl;
+                break;    
+            case 2:
+                log_file<<current_datetime<< " | "<<"Error: "<<message<<std::endl;
+                break;   
+            case default:
+                log_file<<current_datetime<< " | "<<"Unknown Error/Event: "<<message<<std::endl;
+                break;
+        }
+    }
 }
 
 struct Bid {
@@ -226,25 +255,31 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
     CURLcode res;
     std::string response_buffer;
 
+
     std::string authorisation = "authorization: " + token;
     struct curl_slist* headers = NULL;
     headers = curl_slist_append(headers, "Content-Type: application/json");
     headers = curl_slist_append(headers, authorisation.c_str());
 
+    // This Initialisaiton of variables is when to send the payload
     std::string json_payload_str;
     Json::Value payload_json;
     payload_json["exchangeSegment"] = exchangeSegment;
     Json::StreamWriterBuilder writer;
     payload_str = Json::writeString(writer,payload);
 
+    // This Initialisaiton of variables is when to send the payload
+    Json::Value result;
+    Json::CharReaderBuilder response_reader;
     std::string url = "https://ttblaze.iifl.com/apimarketdata/instruments/indexlist";
 
+
     if(curl){
-        curl_easy_opt(curl, CURLOPT_URL,url);
-        curl_easy_opt(curl,CURLOPT_HTTPHEADER,headers);
+        curl_easy_opt(curl, CURLOPT_URL, url);
+        curl_easy_opt(curl, CURLOPT_HTTPHEADER, headers);
         curl_easy_opt(curl, CURLOPT_WRITEFUNCTION, WriteCallBack);
         curl_easy_opt(curl, CURLOPT_WRITEDATA, &response_buffer);
-
+    
         res = curl_easy_perform(curl);
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
@@ -255,6 +290,7 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
 
         if(res!=CURLE_OK){
             std::cerr<<"Bad Request please check the parameters while sending a get request for IndexListResponse()"<<std::endl;
+            logEvent("Bad Request please check the parameters while sending a get request for IndexListResponse()");
             if(res == CURLE_COULDNT_CONNECT){
                 std::cerr<<"Couldn't connect to the server. Please check network connection or server address: "<<curl_easy_strerror(res)<<std::endl;
             } else if(res == CURLE_OPERATION_TIMEDOUT){
@@ -290,8 +326,10 @@ std::tuple<int,std::vector<std::string>> MarketDataAPIFunctions::IndexList(const
 
         return std::make_tuple(exchangeSegment,IndexList);
     } else {
-        std::cout<<"Something went wrong with IndexListResponse()"<<std::endl;
+        std::cerr<<"Something went wrong with IndexListResponse() While Initialising Curl"<<std::endl;
     }
+
+    
 }
 
 
@@ -306,10 +344,16 @@ void MarketDataAPIFunctions::Subscribe(const int& exchangeSegment,
     std::string authorization_header = "authorization" + token;
     struct curl_slist* header = nullptr;
 
-
+    // This Initialisaiton of variables is when to send the payload
     Json::Value instruments_json, payload_json;
     std::string json_payload_str;
     payload_json["instruments"] = Json::arrayValue;
+
+    // This Initialisaiton of variables is when to send the payload
+    Json::Value result;
+    Json::CharReaderBuilder response_reader;
+    std::string errors;
+    
 
     curl = curl_easy_init();
 
@@ -336,7 +380,18 @@ void MarketDataAPIFunctions::Subscribe(const int& exchangeSegment,
         curl_easy_setopt(curl,CURLOPT_WRITEDATA,&response_buffer);
 
         std::cout<<"Peforming A Curl Subscribe()"<<std::endl;
+        res = curl_easy_perform(curl);
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
 
+        std::istringstream res_stream(response_buffer);
+
+        if(!Json::parseFromStream(response_reader,res_stream,&result,&errors)){
+            std::cerr<<"Error In Storing Data From Response Stream In A JSON Object In Subscribe"<<std::endl;
+        }
+        
+           
+        
     }
 
 
